@@ -7,21 +7,25 @@ import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
-import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
+import com.gregtechceu.gtceu.client.renderer.machine.LargeBoilerRenderer;
+import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
+import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidType;
+import net.sqvizers.forgeborncore.common.data.machine.multiblock.IPBFMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
+import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +46,7 @@ public class FBCMachines {
     public static final Int2IntFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 4 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * FluidType.BUCKET_VOLUME;
 
 
-    public static final MachineDefinition PRIMITIVE_FURNACE = REGISTRATE.multiblock("primitive_furnace", MultiblockControllerMachine::new)
+    /*public static final MachineDefinition PRIMITIVE_FURNACE = REGISTRATE.multiblock("primitive_furnace", MultiblockControllerMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .appearanceBlock(COBBLESTONE_BRICKS)
             .recipeType(GTRecipeTypes.FURNACE_RECIPES)
@@ -61,6 +65,31 @@ public class FBCMachines {
 
                     GTCEu.id("block/machines/furnace"), false)
             .tooltips(Component.translatable("block.forgeborncore.steam_forge_hammer.tooltip"))
+            .register();*/
+
+    public static final MultiblockMachineDefinition INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = GTRegistration.REGISTRATE
+            .multiblock("industrial_primitive_blast_furnace", IPBFMachine::new)
+            .rotationState(RotationState.ALL)
+            .recipeType(FBRecipeTypes.INDUSTRIAL_PRIMITIVE_BLAST_FURNACE_RECIPES)
+            .recipeModifier(IPBFMachine::recipeModifier, true)
+            .appearanceBlock(CASING_PRIMITIVE_BRICKS)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("QQQ", "XXX", "XXX", "XXX", "XXX")
+                    .aisle("QQQ", "X#X", "X#X", "X#X", "X#X")
+                    .aisle("QQQ", "XYX", "XXX", "XXX", "XXX")
+                    .where('X', blocks(CASING_PRIMITIVE_BRICKS.get()))
+                    .where('#', Predicates.air())
+                    .where('Y', Predicates.controller(blocks(definition.getBlock())))
+                    .where('Q', blocks(FIREBOX_STEEL.get()).setMinGlobalLimited(6)
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
+                    .build())
+            .renderer(() -> new LargeBoilerRenderer(GTCEu.id("block/casings/solid/machine_primitive_bricks"),
+                    BoilerFireboxType.STEEL_FIREBOX,
+                    GTCEu.id("block/multiblock/primitive_blast_furnace")))
             .register();
 
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
