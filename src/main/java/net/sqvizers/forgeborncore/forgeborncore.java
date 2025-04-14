@@ -20,8 +20,14 @@ import net.sqvizers.forgeborncore.common.data.FBCMachines;
 import net.sqvizers.forgeborncore.data.FBCDatagen;
 
 import net.sqvizers.forgeborncore.data.material.ForgeMaterials;
+import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.DarkAsh;
+import static com.ibm.icu.impl.CurrencyData.provider;
 
 @Mod(forgeborncore.MOD_ID)
 public class forgeborncore {
@@ -41,6 +47,7 @@ public class forgeborncore {
     }
 
     public static void init() {
+        FBRecipeTypes.init();
         ConfigHolder.init();
         FBCRegistries.REGISTRATE.registerRegistrate();
         FBCCreativeModeTabs.init();
