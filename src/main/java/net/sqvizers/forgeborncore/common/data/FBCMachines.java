@@ -27,6 +27,7 @@ import com.gregtechceu.gtceu.config.ConfigHolder;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidType;
+import net.sqvizers.forgeborncore.api.machine.multiblock.PrimitiveFurnaceMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
@@ -70,12 +71,12 @@ public class FBCMachines {
             .tooltips(Component.translatable("block.forgeborncore.steam_forge_hammer.tooltip"))
             .register();*/
 
-    public static final MultiblockMachineDefinition PRIMITIVE_FURNACE = REGISTRATE
-            .multiblock("primitive_furnace", PrimitiveBlastFurnaceMachine::new)
+    /*public static final MultiblockMachineDefinition PRIMITIVE_FURNACE = REGISTRATE
+            .multiblock("primitive_furnace", PrimitiveFurnaceMachine::new) //(a) -> new PrimitiveFurnaceMachine(a))
             .rotationState(RotationState.ALL)
-            .recipeType(FBRecipeTypes.PRIMITIVE_FURNACE_RECIPES)
+            .recipeType(GTRecipeTypes.FURNACE_RECIPES)
             .renderer(() -> new PrimitiveBlastFurnaceRenderer(GTCEu.id("block/casings/solid/machine_primitive_bricks"),
-                    GTCEu.id("block/multiblock/primitive_blast_furnace")))
+                    GTCEu.id("block/multiblock/primitive_blast_furnace"))) //
             .hasTESR(true)
             .appearanceBlock(CASING_PRIMITIVE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
@@ -86,6 +87,36 @@ public class FBCMachines {
                     .where('#', Predicates.air())
                     .where('Y', Predicates.controller(blocks(definition.getBlock())))
                     .build())
+            .register();*/
+
+    public static final MultiblockMachineDefinition HIGH_PRESSURE_ASSEMBLER = GTRegistration.REGISTRATE
+            .multiblock("high_pressure_assembler", WeakSteamParallelMultiBlockMachine::new)
+            .rotationState(RotationState.ALL)
+            .recipeType(GTRecipeTypes.ASSEMBLER_RECIPES)
+            .recipeModifier(WeakSteamParallelMultiBlockMachine::recipeModifier, true)
+            .appearanceBlock(STEEL_BRICKS_HULL)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("AAAAA", "BBBBB", " BBB ")
+                    .aisle("AAAAA", "BDDDB", " BBB ")
+                    .aisle("AAAAA", "BYBBB", " BBB ")
+                    .where('B', blocks(STEEL_BRICKS_HULL.get())
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(2))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
+                    .where(' ', Predicates.any())
+                    .where('Y', Predicates.controller(blocks(definition.getBlock())))
+                    .where('A', blocks(FIREBOX_STEEL.get()).setMinGlobalLimited(11)
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
+                    .where('D', blocks(CASING_STEEL_GEARBOX.get()))
+                    .build())
+            .renderer(() -> new LargeBoilerRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+                    BoilerFireboxType.STEEL_FIREBOX,
+                    GTCEu.id("block/multiblock/implosion_compressor")))
+            /*.tooltips(Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.0"),
+                    Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.1"),
+                    Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.2"))*/
             .register();
 
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
