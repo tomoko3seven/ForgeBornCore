@@ -1,24 +1,18 @@
 package net.sqvizers.forgeborncore.data.lang;
 
-import java.util.Set;
-
-import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.gregtechceu.gtceu.utils.FormattingUtil;
 
-public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
-    private static final Set<Material> MATERIALS = Set.of();
+import static com.gregtechceu.gtceu.data.lang.LangHandler.replace;
+
+public class LangHandler {
 
     public static void init(RegistrateLangProvider provider) {
-        initItemTooltips(provider);
-    }
+        replace(provider, "cosmiccore.multiblock.naqreactor.tooltip.0",
+                "§cA massive reactor powered by explosions and reactive fuel");
+        replace(provider, "cosmiccore.multiblock.naqreactor.tooltip.1",
+                "§bWill always attempt to parallel to 16x output.");
+        replace(provider, "cosmiccore.multiblock.naqreactor.tooltip.2", "§cOnly Accepts Laser hatches.");
 
-    private static void initItemTooltips(RegistrateLangProvider provider) {
-
-        // materials
-        for (Material material : MATERIALS) {
-            provider.add(material.getUnlocalizedName(), FormattingUtil.toEnglishName(material.getName()));
-        }
-
+        replace(provider, "forgeborncore.lv_botanical_circuit", "§aLV Botanical Circuit");
     }
 }

@@ -30,7 +30,7 @@ public class FBItems {
     }
 
     //Custom Circuits
-    //Botania Circuit
+    //Botania Circuits
 
     public static final ItemEntry<ComponentItem> LV_BOTANICAL_CIRCUIT = REGISTRATE
             .item("lv_botanical_circuit", ComponentItem::create)
@@ -59,6 +59,13 @@ public class FBItems {
             .properties(p -> p.stacksTo(64))
             .defaultModel()
             .register();
+
+    //Blood Magic Circuits
+
+
+
+    //Ars Noveau Circuits
+
 
     public static <T extends ComponentItem> NonNullConsumer<T> attach(IItemComponent... components) {
         return item -> item.attachComponents(components);

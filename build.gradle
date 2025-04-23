@@ -128,7 +128,6 @@ repositories {
             includeGroup "dev.ftb.mods"
         }
     }
-
     maven {
         name 'Configuration'
         url 'https://repsy.io/mvn/toma/public/'
@@ -149,6 +148,7 @@ dependencies {
     modImplementation("com.gregtechceu.gtceu:gtceu-${project.minecraft_version}:${project.gtceu_version}") { transitive = false }
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-${project.minecraft_version}:${project.ldlib_version}") { transitive = false }
     modImplementation("dev.toma.configuration:configuration-forge-${project.minecraft_version}:${project.configuration_version}")
+
     runtimeOnly("io.github.llamalad7:mixinextras-forge:${project.mixinextra_version}")
     runtimeOnly("io.github.llamalad7:mixinextras-common:${project.mixinextra_version}")
 
