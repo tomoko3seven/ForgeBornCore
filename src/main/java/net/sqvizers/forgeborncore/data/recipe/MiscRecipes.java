@@ -21,11 +21,11 @@ public class MiscRecipes {
                 'G', new UnificationEntry(gear, Steel),
                 'T', new UnificationEntry(rotor, GTMaterials.Tin));
 
-        VanillaRecipeHelper.addShapedRecipe(provider, true, forgeborncore.id("steam2"),
+        /*VanillaRecipeHelper.addShapedRecipe(provider, true, forgeborncore.id("steam2"),
                 net.sqvizers.forgeborncore.common.data.FBCMachines.STEAM_SIFTING_FUNNEL.asStack(1),
                 "PGP", "PTP", "PGP",
                 'P', GTBlocks.CASING_BRONZE_BRICKS,
                 'G', new UnificationEntry(gear, Bronze),
-                'T', GTMachines.STEAM_ALLOY_SMELTER.left().asStack());
+                'T', GTMachines.STEAM_ALLOY_SMELTER.left().asStack());*/
 
 }}

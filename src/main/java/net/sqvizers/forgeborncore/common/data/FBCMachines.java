@@ -175,7 +175,7 @@ public class FBCMachines {
             .tooltips(Component.translatable("forgeborncore.multiblock.steel_steam_forge_hammer.tooltip"))
             .register();
 
-    public static final MachineDefinition STEAM_SIFTING_FUNNEL = REGISTRATE.multiblock("steam_sifting_funnel", SteamParallelMultiblockMachine::new)
+    /*public static final MachineDefinition STEAM_SIFTING_FUNNEL = REGISTRATE.multiblock("steam_sifting_funnel", SteamParallelMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .recipeType(GTRecipeTypes.SIFTER_RECIPES)
@@ -199,7 +199,7 @@ public class FBCMachines {
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
 
                     GTCEu.id("block/machines/sifter"), false)
-            .register();
+            .register();*/
 
     /*public static final MachineDefinition STEAM_CONTAINER = REGISTRATE.multiblock("steam_container", SteamParallelMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)

@@ -67,6 +67,13 @@ public class FBItems {
     //Ars Noveau Circuits
 
 
+    //Craft-Materials
+    public static final ItemEntry<ComponentItem> STONE_GEAR = REGISTRATE
+            .item("stone_gear", ComponentItem::create)
+            .lang("Stone Gear")
+            .properties(p -> p.stacksTo(64))
+            .register();
+
     public static <T extends ComponentItem> NonNullConsumer<T> attach(IItemComponent... components) {
         return item -> item.attachComponents(components);
     }
