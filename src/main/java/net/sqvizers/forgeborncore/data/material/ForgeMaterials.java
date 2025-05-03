@@ -12,6 +12,7 @@ import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag
 
 public class ForgeMaterials {
 
+    public static Material SpiritSteel;
     public static Material Draconium;
 
     public static Material Livingwood;
@@ -42,6 +43,11 @@ public class ForgeMaterials {
                         .attackSpeed(0.2F).enchantability(3).build())
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
                 .buildAndRegister().setFormula("Dc");
+        SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
+                .ingot()
+                .color(0x5c6770).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
 
         Manasteel = new Material.Builder(forgeborncore.id("manasteel"))
                 .ingot()
