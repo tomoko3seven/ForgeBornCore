@@ -49,57 +49,18 @@ public class FBCMachines {
     public final static int[] HIGH_TIERS = GTValues.tiersBetween(IV, GTCEuAPI.isHighTier() ? OpV : UHV);
     public static final Int2IntFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 4 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * FluidType.BUCKET_VOLUME;
 
-
-    /*public static final MachineDefinition PRIMITIVE_FURNACE = REGISTRATE.multiblock("primitive_furnace", MultiblockControllerMachine::new)
-            .rotationState(RotationState.NON_Y_AXIS)
-            .appearanceBlock(COBBLESTONE_BRICKS)
-            .recipeType(GTRecipeTypes.FURNACE_RECIPES)
-            .addOutputLimit(ItemRecipeCapability.CAP, 1)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("XXX",  "XXX", "XXX", " X ", " X ")
-                    .aisle("XXX",  "XCX", "X#X", "X#X", "X#X")
-                    .aisle("XXX",  "XSX", "XXX", " X ", " X ")
-                    .where('S', Predicates.controller(blocks(definition.getBlock())))
-                    .where('#', Predicates.air())
-                    .where(' ', Predicates.any())
-                    .where('C', Predicates.blocks(COAL_BLOCK))
-                    .where('X', blocks(COBBLESTONE_BRICKS.get()))
-                    .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
-
-                    GTCEu.id("block/machines/furnace"), false)
-            .tooltips(Component.translatable("block.forgeborncore.steam_forge_hammer.tooltip"))
-            .register();*/
-
-    /*public static final MultiblockMachineDefinition PRIMITIVE_FURNACE = REGISTRATE
-            .multiblock("primitive_furnace", PrimitiveFurnaceMachine::new) //(a) -> new PrimitiveFurnaceMachine(a))
-            .rotationState(RotationState.ALL)
-            .recipeType(GTRecipeTypes.FURNACE_RECIPES)
-            .renderer(() -> new PrimitiveBlastFurnaceRenderer(GTCEu.id("block/casings/solid/machine_primitive_bricks"),
-                    GTCEu.id("block/multiblock/primitive_blast_furnace"))) //
-            .hasTESR(true)
-            .appearanceBlock(CASING_PRIMITIVE_BRICKS)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("XXX", "XXX", "XXX", "XXX")
-                    .aisle("XXX", "X#X", "X#X", "X#X")
-                    .aisle("XXX", "XYX", "XXX", "XXX")
-                    .where('X', blocks(CASING_PRIMITIVE_BRICKS.get()))
-                    .where('#', Predicates.air())
-                    .where('Y', Predicates.controller(blocks(definition.getBlock())))
-                    .build())
-            .register();*/
-
     public static final MultiblockMachineDefinition HIGH_PRESSURE_ASSEMBLER = GTRegistration.REGISTRATE
             .multiblock("high_pressure_assembler", WeakSteamParallelMultiBlockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.ASSEMBLER_RECIPES)
+            .tier(ULV)
             .recipeModifier(WeakSteamParallelMultiBlockMachine::recipeModifier, true)
-            .appearanceBlock(STEEL_BRICKS_HULL)
+            .appearanceBlock(CASING_STEEL_SOLID)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("AAAAA", "BBBBB", " BBB ")
                     .aisle("AAAAA", "BDDDB", " BBB ")
-                    .aisle("AAAAA", "BYBBB", " BBB ")
-                    .where('B', blocks(STEEL_BRICKS_HULL.get())
+                    .aisle("AAAAA", "BBYBB", " BBB ")
+                    .where('B', blocks(CASING_STEEL_SOLID.get())
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
                                     .setExactLimit(2))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)
@@ -107,16 +68,14 @@ public class FBCMachines {
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
                     .where(' ', Predicates.any())
                     .where('Y', Predicates.controller(blocks(definition.getBlock())))
-                    .where('A', blocks(FIREBOX_STEEL.get()).setMinGlobalLimited(11)
+                    .where('A', blocks(STEEL_HULL.get()).setMinGlobalLimited(11)
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
                     .where('D', blocks(CASING_STEEL_GEARBOX.get()))
                     .build())
-            .renderer(() -> new LargeBoilerRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
-                    BoilerFireboxType.STEEL_FIREBOX,
-                    GTCEu.id("block/multiblock/implosion_compressor")))
-            /*.tooltips(Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.0"),
-                    Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.1"),
-                    Component.translatable("cosmiccore.multiblock.hpsassem.tooltip.2"))*/
+            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+                    GTCEu.id("block/multiblock/implosion_compressor"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.hpa.tooltip.1"),
+                    Component.translatable("forgeborncore.multiblock.hpa.tooltip.2"))
             .register();
 
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)

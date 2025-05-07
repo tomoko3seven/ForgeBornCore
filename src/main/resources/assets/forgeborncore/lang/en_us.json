@@ -1,5 +1,22 @@
 {
   "block.forgeborncore.steel_steam_forge_hammer": "Steel Steam Forge Hammer",
+  "block.gtceu.high_pressure_assembler": "High Pressure Assembler",
   "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Multiblock Forge Hammer. Faster than Bronze version.",
-  "item.forgeborncore.lv_botanical_circuit": "LV Botanical Circuit"
+  "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
+  "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I really like this multi.",
+  "item.forgeborncore.lv_botanical_circuit": "LV Botanical Circuit",
+
+  "material.forgeborncore.spiritsteel": "Spirit Steel",
+
+  "material.forgeborncore.draconium": "&5Draconium",
+
+  "material.forgeborncore.livingwood": "Livingwood",
+  "material.forgeborncore.livingrock": "Livingrock",
+
+  "material.forgeborncore.manasteel": "Manasteel",
+  "material.forgeborncore.elementium": "Elementium",
+  "material.forgeborncore.terrasteel": "Terrasteel",
+  "material.forgeborncore.adamantium": "Adamantium",
+
+  "material.forgeborncore.ichor": "Ichor"
 }

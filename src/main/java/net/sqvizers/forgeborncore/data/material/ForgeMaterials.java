@@ -46,7 +46,7 @@ public class ForgeMaterials {
         SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
                 .ingot()
                 .color(0x5c6770).iconSet(MaterialIconSet.BRIGHT)
-                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
                 .buildAndRegister();
 
         Manasteel = new Material.Builder(forgeborncore.id("manasteel"))

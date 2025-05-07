@@ -14,5 +14,6 @@ public class LangHandler {
         replace(provider, "cosmiccore.multiblock.naqreactor.tooltip.2", "§cOnly Accepts Laser hatches.");
 
         replace(provider, "forgeborncore.lv_botanical_circuit", "§aLV Botanical Circuit");
+
     }
 }
