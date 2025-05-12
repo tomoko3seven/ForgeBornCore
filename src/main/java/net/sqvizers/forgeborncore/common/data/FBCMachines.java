@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
@@ -29,6 +30,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidType;
 import net.sqvizers.forgeborncore.api.machine.multiblock.PrimitiveFurnaceMachine;
+import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
@@ -166,57 +168,22 @@ public class FBCMachines {
             .tooltips(Component.translatable("forgeborncore.multiblock.steel_steam_forge_hammer.tooltip"))
             .register();
 
-    /*public static final MachineDefinition STEAM_SIFTING_FUNNEL = REGISTRATE.multiblock("steam_sifting_funnel", SteamParallelMultiblockMachine::new)
-            .rotationState(RotationState.NON_Y_AXIS)
-            .appearanceBlock(CASING_BRONZE_BRICKS)
-            .recipeType(GTRecipeTypes.SIFTER_RECIPES)
-            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
-            .addOutputLimit(ItemRecipeCapability.CAP, 1)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("FFFFF", "BXXXB", "BXXXB", "BXXXB")
-                    .aisle("FFFFF", "X   X", "X   X", "X   X")
-                    .aisle("FFFFF", "X   X", "X   X", "X   X")
-                    .aisle("FFFFF", "BXSXB", "BXXXB", "BXXXB")
-                    .where('S', Predicates.controller(blocks(definition.getBlock())))
-                    .where('F', blocks(BRONZE_BRICKS_HULL.get()).setMinGlobalLimited(6)
-                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
-                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
-                    .where(' ', Predicates.air())
-                    .where('X', blocks(CASING_BRONZE_BRICKS.get()))
-                    .where('B', blocks(BRONZE_HULL.get()))
-                    .build())
-            .tooltips(Component.translatable("block.forgeborncore.steam_sifting_funnel.tooltip"))
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+    public static final MachineDefinition STEAM_IMPORT_HATCH = GTRegistration.REGISTRATE
+            .machine("steam_fluid_input_hatch", holder -> new SteamFluidHatchPartMachine(holder, IO.IN, 4000, 1))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.IMPORT_FLUIDS)
+            .overlaySteamHullRenderer("fluid_hatch.import")
+            .tooltips(Component.translatable("gtceu.machine.steam_fluid_hatch_notice"))
+            .langValue("Fluid Input Hatch (Steam)")
+            .register();
+    public static final MachineDefinition STEAM_EXPORT_HATCH = GTRegistration.REGISTRATE
+            .machine("steam_fluid_output_hatch", holder -> new SteamFluidHatchPartMachine(holder, IO.OUT, 4000, 1))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.EXPORT_FLUIDS)
+            .overlaySteamHullRenderer("fluid_hatch.export")
+            .langValue("Fluid Output Hatch (Steam)")
+            .register();
 
-                    GTCEu.id("block/machines/sifter"), false)
-            .register();*/
-
-    /*public static final MachineDefinition STEAM_CONTAINER = REGISTRATE.multiblock("steam_container", SteamParallelMultiblockMachine::new)
-            .rotationState(RotationState.NON_Y_AXIS)
-            .appearanceBlock(CASING_BRONZE_BRICKS)
-            .recipeType(GTRecipeTypes.SIFTER_RECIPES)
-            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
-            .addOutputLimit(ItemRecipeCapability.CAP, 1)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("FFFFF", "BXXXB", "BXXXB", "BXXXB")
-                    .aisle("FFFFF", "X   X", "X   X", "X   X")
-                    .aisle("FFFFF", "X   X", "X   X", "X   X")
-                    .aisle("FFFFF", "BXSXB", "BXXXB", "BXXXB")
-                    .where('S', Predicates.controller(blocks(definition.getBlock())))
-                    .where('F', blocks(BRONZE_BRICKS_HULL.get()).setMinGlobalLimited(6)
-                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
-                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
-                    .where(' ', Predicates.air())
-                    .where('X', blocks(CASING_BRONZE_BRICKS.get()))
-                    .where('B', blocks(BRONZE_HULL.get()))
-                    .build())
-            .tooltips(Component.translatable("block.forgeborncore.steam_sifting_funnel.tooltip"))
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
-
-                    GTCEu.id("block/machines/tank"), false)
-            .register();*/
 
 
     public static MachineDefinition[] registerSimpleMachines(String name,

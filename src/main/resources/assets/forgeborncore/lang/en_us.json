@@ -4,6 +4,9 @@
   "block.gtceu.steam_mixer": "Steam Mixer",
   "forgeborncore.multiblock.steam_mixer.tooltip": "Runs ULV Recipes in 8 Parallel.",
   "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Multiblock Forge Hammer. Faster than Bronze version.",
+
+  "gtceu.machine.steam_fluid_hatch_warning": "Import Hatch for Fluids. IS NOT FOR STEAM!",
+
   "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
   "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I really like this multi.",
   "item.forgeborncore.lv_botanical_circuit": "LV Botanical Circuit",
