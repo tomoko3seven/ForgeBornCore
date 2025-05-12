@@ -83,10 +83,9 @@ public class FBCMachines {
     public static final MultiblockMachineDefinition STEAM_MIXER = GTRegistration.REGISTRATE
             .multiblock("steam_mixer", SteamParallelMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            /*.recipeType(FBRecipeTypes.CONCRETE_MIXER)*/
             .recipeType(GTRecipeTypes.MIXER_RECIPES)
             .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
-            .appearanceBlock(CASING_STEEL_SOLID)
+            .appearanceBlock(CASING_INDUSTRIAL_STEAM)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("III", "III", "III")
                     .aisle("   ", " A ", "   ")
@@ -95,20 +94,20 @@ public class FBCMachines {
                     .aisle(" B ", "B B", " B ")
                     .aisle("   ", " A ", "   ")
                     .aisle("III", "ICI", "III")
-                    .where('I', Predicates.blocks(GCYMBlocks.CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(14)
+                    .where('I', Predicates.blocks(GCYMBlocks.CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(13)
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
                                     .setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
-                    .where(' ', Predicates.air())
+                    .where(' ', Predicates.any())
                     .where('C', Predicates.controller(blocks(definition.getBlock())))
                     .where('B', blocks(BRONZE_HULL.get()))
                     .where('A', blocks(CASING_BRONZE_PIPE.get()))
                     .build())
             .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
-                    GTCEu.id("block/multiblock/mixing_vessel"))
-            .tooltips(Component.translatable("forgeborncore.multiblock.steam_mixer.tooltip.1"))
+                    GTCEu.id("block/machines/electrolyzer"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.steam_mixer.tooltip"))
             .register();
 
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
