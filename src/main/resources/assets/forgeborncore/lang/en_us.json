@@ -1,6 +1,8 @@
 {
   "block.forgeborncore.steel_steam_forge_hammer": "Steel Steam Forge Hammer",
   "block.gtceu.high_pressure_assembler": "High Pressure Assembler",
+  "block.gtceu.steam_mixer": "Steam Mixer",
+  "forgeborncore.multiblock.steam_mixer.tooltip.1,": "Runs ULV Recipes in 8 Parallel.",
   "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Multiblock Forge Hammer. Faster than Bronze version.",
   "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
   "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I really like this multi.",
@@ -8,7 +10,7 @@
 
   "material.forgeborncore.spiritsteel": "Spirit Steel",
 
-  "material.forgeborncore.draconium": "&5Draconium",
+  "material.forgeborncore.draconium": "&5 Draconium",
 
   "material.forgeborncore.livingwood": "Livingwood",
   "material.forgeborncore.livingrock": "Livingrock",

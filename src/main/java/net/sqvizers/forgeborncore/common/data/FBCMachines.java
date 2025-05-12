@@ -18,6 +18,7 @@ import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
 import com.gregtechceu.gtceu.client.renderer.machine.LargeBoilerRenderer;
 import com.gregtechceu.gtceu.client.renderer.machine.PrimitiveBlastFurnaceRenderer;
 import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
+import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.primitive.PrimitiveBlastFurnaceMachine;
@@ -37,6 +38,7 @@ import java.util.function.BiFunction;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
+import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
@@ -76,6 +78,37 @@ public class FBCMachines {
                     GTCEu.id("block/multiblock/implosion_compressor"))
             .tooltips(Component.translatable("forgeborncore.multiblock.hpa.tooltip.1"),
                     Component.translatable("forgeborncore.multiblock.hpa.tooltip.2"))
+            .register();
+
+    public static final MultiblockMachineDefinition STEAM_MIXER = GTRegistration.REGISTRATE
+            .multiblock("steam_mixer", SteamParallelMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            /*.recipeType(FBRecipeTypes.CONCRETE_MIXER)*/
+            .recipeType(GTRecipeTypes.MIXER_RECIPES)
+            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("III", "III", "III")
+                    .aisle("   ", " A ", "   ")
+                    .aisle(" B ", "B B", " B ")
+                    .aisle(" B ", "B B", " B ")
+                    .aisle(" B ", "B B", " B ")
+                    .aisle("   ", " A ", "   ")
+                    .aisle("III", "ICI", "III")
+                    .where('I', Predicates.blocks(GCYMBlocks.CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(14)
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
+                    .where(' ', Predicates.air())
+                    .where('C', Predicates.controller(blocks(definition.getBlock())))
+                    .where('B', blocks(BRONZE_HULL.get()))
+                    .where('A', blocks(CASING_BRONZE_PIPE.get()))
+                    .build())
+            .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
+                    GTCEu.id("block/multiblock/mixing_vessel"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.steam_mixer.tooltip.1"))
             .register();
 
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)

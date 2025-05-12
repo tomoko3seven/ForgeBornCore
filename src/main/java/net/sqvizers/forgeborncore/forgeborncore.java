@@ -48,7 +48,6 @@ public class forgeborncore {
     }
 
     public static void init() {
-        FBRecipeTypes.init();
         ConfigHolder.init();
         FBCRegistries.REGISTRATE.registerRegistrate();
         FBCCreativeModeTabs.init();
@@ -74,6 +73,10 @@ public class forgeborncore {
     @SubscribeEvent
     public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         FBCMachines.init();
+    }
+
+    public void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
+        FBRecipeTypes.init();
     }
 
     /*@SubscribeEvent
