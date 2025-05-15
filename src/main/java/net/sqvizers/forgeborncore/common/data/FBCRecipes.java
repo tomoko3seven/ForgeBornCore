@@ -11,15 +11,16 @@ import java.util.function.Consumer;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.register;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
+import static net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes.SAWMILLRECIPES;
 
 public class FBCRecipes {
 
-    /*public final static GTRecipeType CONCRETE_MIXER_RECIPES = register(
-            "concrete_mixer", MULTIBLOCK)
-            .setMaxIOSize(3, 3, 1, 0)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setMaxTooltips(1)
-            .setSound(GTSoundEntries.CENTRIFUGE);*/
+    /*private static void registerSawmillRecipes(Consumer<FinishedRecipe> provider) {
+        SAWMILLRECIPES.recipeBuilder("wood_to_").inputItems(ingot, Iron)
+                .inputItems(gem, Coal, 2).outputItems(ingot, Steel).outputItems(dustTiny, DarkAsh, 2)
+                .duration((int) (1800 * 0.75f)).inputFluids(Creosote.getFluid(250))
+                .save(provider);
+    }*/
 
     public static void init(Consumer<FinishedRecipe> provider) {
         MiscRecipes.init(provider);

@@ -15,6 +15,12 @@ public class ForgeMaterials {
     public static Material SpiritSteel;
     public static Material Draconium;
 
+    //Nature`s Aura
+    public static Material InfusedIron;
+    public static Material TaintedGold;
+    public static Material SkyIngot;
+    public static Material DepthsIngot;
+
     public static Material Livingwood;
     public static Material Livingrock;
     public static Material Manasteel;
@@ -25,6 +31,28 @@ public class ForgeMaterials {
     public static Material Ichor;
 
     public static void register() {
+        //Nature`s Aura
+        InfusedIron = new Material.Builder(forgeborncore.id("infusediron"))
+                .ingot()
+                .color(0x3ea248).iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("?Fe");
+        TaintedGold = new Material.Builder(forgeborncore.id("taintedgold"))
+                .ingot()
+                .color(0xb06a2e).iconSet(MaterialIconSet.ROUGH)
+                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("?Au");
+        SkyIngot = new Material.Builder(forgeborncore.id("skyingot"))
+                .ingot()
+                .color(0x9ee3f0).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("?");
+        DepthsIngot = new Material.Builder(forgeborncore.id("depthsingot"))
+                .ingot()
+                .color(0x5e456b).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("?");
+
         //Plates ONLY
         Livingwood = new Material.Builder(forgeborncore.id("livingwood"))
                 .color(0x34140c).iconSet(MaterialIconSet.ROUGH)
@@ -45,7 +73,7 @@ public class ForgeMaterials {
                 .buildAndRegister().setFormula("Dc");
         SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
                 .ingot()
-                .color(0x5c6770).iconSet(MaterialIconSet.BRIGHT)
+                .color(0x86684f).iconSet(MaterialIconSet.BRIGHT)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
                 .buildAndRegister();
 

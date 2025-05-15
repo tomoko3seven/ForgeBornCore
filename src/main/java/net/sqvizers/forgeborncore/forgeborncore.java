@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.registry.MaterialRegistry;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.api.sound.SoundEntry;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 
 import com.lowdragmc.lowdraglib.Platform;
@@ -41,6 +42,7 @@ public class forgeborncore {
         forgeborncore.init();
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.register(this);
+        bus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
 
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
 

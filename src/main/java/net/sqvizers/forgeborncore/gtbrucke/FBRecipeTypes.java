@@ -11,6 +11,12 @@ import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
 
 public class FBRecipeTypes {
 
+    public final static GTRecipeType SAWMILLRECIPES = register(
+            "sawmill", MULTIBLOCK)
+            .setMaxIOSize(4, 3, 0, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setMaxTooltips(1)
+            .setSound(GTSoundEntries.CUT);
 
     public static void init() {
 

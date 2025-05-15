@@ -1,14 +1,17 @@
 {
-  "block.forgeborncore.steel_steam_forge_hammer": "Steel Steam Forge Hammer",
+  "block.gtceu.steam_forge_hammer": "Large Steam Forge Hammer",
+  "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Performs Forge-Hammer Recipes in 4 Parallel.",
   "block.gtceu.high_pressure_assembler": "High Pressure Assembler",
+  "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
+  "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I Really Like This Multi.",
   "block.gtceu.steam_mixer": "Steam Mixer",
   "forgeborncore.multiblock.steam_mixer.tooltip": "Runs ULV Recipes in 8 Parallel.",
-  "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Multiblock Forge Hammer. Faster than Bronze version.",
+  "block.sawmill.sawmill": "Sawmill",
+  "forgeborncore.multiblock.sawmill.tooltip": "Hi, IMPACT!",
+  "forgeborncore.multiblock.sawmill.tooltip.2": "Performs Planks and Other Wood Recipes in 8 Parallel.",
 
   "gtceu.machine.steam_fluid_hatch_warning": "Import Hatch for Fluids. IS NOT FOR STEAM!",
 
-  "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
-  "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I really like this multi.",
   "item.forgeborncore.lv_botanical_circuit": "LV Botanical Circuit",
 
   "material.forgeborncore.spiritsteel": "Spirit Steel",
@@ -22,6 +25,11 @@
   "material.forgeborncore.elementium": "Elementium",
   "material.forgeborncore.terrasteel": "Terrasteel",
   "material.forgeborncore.adamantium": "Adamantium",
+
+  "material.forgeborncore.infusediron": "Infused Iron",
+  "material.forgeborncore.taintedgold": "Tainted Gold",
+  "material.forgeborncore.skyingot": "Sky Metall",
+  "material.forgeborncore.depthsingot": "Depths Metall",
 
   "material.forgeborncore.ichor": "Ichor"
 }

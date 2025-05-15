@@ -8,28 +8,22 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
-import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
-import com.gregtechceu.gtceu.client.renderer.machine.LargeBoilerRenderer;
-import com.gregtechceu.gtceu.client.renderer.machine.PrimitiveBlastFurnaceRenderer;
-import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.gregtechceu.gtceu.common.machine.multiblock.primitive.PrimitiveBlastFurnaceMachine;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidType;
-import net.sqvizers.forgeborncore.api.machine.multiblock.PrimitiveFurnaceMachine;
 import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
@@ -40,12 +34,13 @@ import java.util.function.BiFunction;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.frames;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
+import static com.gregtechceu.gtceu.common.machine.multiblock.steam.BoilerType.BRONZE;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
-import static net.sqvizers.forgeborncore.common.FBBlocks.COBBLESTONE_BRICKS;
 
 public class FBCMachines {
     public final static int[] ELECTRIC_TIERS = GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV);
@@ -112,6 +107,34 @@ public class FBCMachines {
             .tooltips(Component.translatable("forgeborncore.multiblock.steam_mixer.tooltip"))
             .register();
 
+    public static final MultiblockMachineDefinition SAWMILL = GTRegistration.REGISTRATE
+            .multiblock("sawmill", SteamParallelMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(FBRecipeTypes.SAWMILLRECIPES)
+            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
+            .appearanceBlock(CASING_INDUSTRIAL_STEAM)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("IFI", "I I", "IFI")
+                    .aisle(" B ", "   ", "III")
+                    .aisle("FBF", "F F", "I I")
+                    .aisle(" B ", "   ", "III")
+                    .aisle("IFI", "C I", "IFI")
+                    .where('I', Predicates.blocks(GCYMBlocks.CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(15)
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1)))
+                    .where(' ', Predicates.any())
+                    .where('C', Predicates.controller(blocks(definition.getBlock())))
+                    .where('B', blocks(BRONZE_BRICKS_HULL.get()))
+                    .where('F', Predicates.frames(GTMaterials.Bronze))
+                    .build())
+            .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
+                    GTCEu.id("block/machines/canner"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip"))
+                    .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))
+            .register();
+
     public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .appearanceBlock(CASING_BRONZE_BRICKS)
@@ -138,34 +161,6 @@ public class FBCMachines {
 
                     GTCEu.id("block/machines/forge_hammer"), false)
             .tooltips(Component.translatable("block.forgeborncore.steam_forge_hammer.tooltip"))
-            .register();
-
-    public static final MachineDefinition STEEL_STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steel_steam_forge_hammer", SteamParallelMultiblockMachine::new)
-            .rotationState(RotationState.NON_Y_AXIS)
-            .appearanceBlock(CASING_STEEL_SOLID)
-            .recipeType(GTRecipeTypes.FORGE_HAMMER_RECIPES)
-            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
-            .addOutputLimit(ItemRecipeCapability.CAP, 1)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle(" XXX ",  "     ", "     ", "     ", "     ", "     ", "     ")
-                    .aisle("XXXXX",  " XXX ", "     ", "     ", "     ", "  X  ", "     ")
-                    .aisle("XXXXX",  "XX XX", "X   X", "X I X", "X I X", "XXIXX", "  G  ")
-                    .aisle("XXXXX",  " XSX ", "     ", "     ", "     ", "  X  ", "     ")
-                    .aisle(" XXX ",  "     ", "     ", "     ", "     ", "     ", "     ")
-                    .where('S', Predicates.controller(blocks(definition.getBlock())))
-                    .where('#', Predicates.air())
-                    .where(' ', Predicates.any())
-                    .where('I', Predicates.blocks(IRON_BLOCK))
-                    .where('G', Predicates.blocks(CASING_STEEL_GEARBOX.get()))
-                    .where('X', blocks(CASING_STEEL_SOLID.get()).setMinGlobalLimited(6)
-                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
-                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
-                    .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
-
-                    GTCEu.id("block/machines/forge_hammer"), false)
-            .tooltips(Component.translatable("forgeborncore.multiblock.steel_steam_forge_hammer.tooltip"))
             .register();
 
     public static final MachineDefinition STEAM_IMPORT_HATCH = GTRegistration.REGISTRATE
