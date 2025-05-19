@@ -34,10 +34,11 @@ public class FBItems {
 
     public static final ItemEntry<ComponentItem> LV_BOTANICAL_CIRCUIT = REGISTRATE
             .item("lv_botanical_circuit", ComponentItem::create)
-            .lang("Botanical Circuit")
+            .lang("Basic Botanical Circuit")
             .properties(p -> p.stacksTo(64))
             .onRegister(attach(new TooltipBehavior(tooltips -> {
-                tooltips.add(Component.translatable("forgeborncore.lv_botanical_circuit"));
+                tooltips.add(Component.translatable("forgeborncore.lv_botanical_circuit.tooltip.1"));
+                tooltips.add(Component.translatable("forgeborncore.lv_botanical_circuit.tooltip.2"));
             })))
             .defaultModel()
             .register();
@@ -51,7 +52,6 @@ public class FBItems {
             .item("hv_botanical_circuit", ComponentItem::create)
             .lang("Terrasteel Botanical Circuit")
             .properties(p -> p.stacksTo(64))
-            .defaultModel()
             .register();
     public static final ItemEntry<ComponentItem> EV_BOTANICAL_CIRCUIT = REGISTRATE
             .item("ev_botanical_circuit", ComponentItem::create)

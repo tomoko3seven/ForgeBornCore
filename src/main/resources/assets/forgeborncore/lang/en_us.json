@@ -1,22 +1,27 @@
 {
   "block.gtceu.steam_forge_hammer": "Large Steam Forge Hammer",
-  "forgeborncore.multiblock.steel_steam_forge_hammer.tooltip": "Performs Forge-Hammer Recipes in 4 Parallel.",
+  "forgeborncore.multiblock.steam_forge_hammer.tooltip": "Performs Forge-Hammer Recipes in 4 Parallel.",
   "block.gtceu.high_pressure_assembler": "High Pressure Assembler",
   "forgeborncore.multiblock.hpa.tooltip.1": "ULV Multiblock Assembler. 4 Recipes in parallel.",
   "forgeborncore.multiblock.hpa.tooltip.2": "Hi, Cosmic Frontiers. I Really Like This Multi.",
   "block.gtceu.steam_mixer": "Steam Mixer",
   "forgeborncore.multiblock.steam_mixer.tooltip": "Runs ULV Recipes in 8 Parallel.",
-  "block.sawmill.sawmill": "Sawmill",
+  "block.gtceu.sawmill": "Sawmill",
   "forgeborncore.multiblock.sawmill.tooltip": "Hi, IMPACT!",
   "forgeborncore.multiblock.sawmill.tooltip.2": "Performs Planks and Other Wood Recipes in 8 Parallel.",
 
+  "block.gtceu.steam_fluid_output_hatch": "Steam Fluid Output Hatch",
+  "block.gtceu.steam_fluid_input_hatch": "Steam Fluid Input Hatch",
   "gtceu.machine.steam_fluid_hatch_warning": "Import Hatch for Fluids. IS NOT FOR STEAM!",
 
-  "item.forgeborncore.lv_botanical_circuit": "LV Botanical Circuit",
+  "item.forgeborncore.lv_botanical_circuit": "Basic Botanical Circuit",
+  "forgeborncore.lv_botanical_circuit.tooltip.1": "§8First Botanical Circuit",
+  "forgeborncore.lv_botanical_circuit.tooltip.2": "§aLV Botanical Circuit",
+
 
   "material.forgeborncore.spiritsteel": "Spirit Steel",
 
-  "material.forgeborncore.draconium": "&5 Draconium",
+  "material.forgeborncore.draconium": "§5Draconium",
 
   "material.forgeborncore.livingwood": "Livingwood",
   "material.forgeborncore.livingrock": "Livingrock",
