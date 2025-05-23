@@ -102,6 +102,10 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven {
+        name "curios"
+        url "https://maven.theillusivec4.top/"
+    }
+    maven {
         // Curse Forge File
         url "https://cursemaven.com/"
         content {
@@ -151,6 +155,14 @@ dependencies {
 
     runtimeOnly("io.github.llamalad7:mixinextras-forge:${project.mixinextra_version}")
     runtimeOnly("io.github.llamalad7:mixinextras-common:${project.mixinextra_version}")
+
+    /*modImplementation("vazkii.botania:Botania:${project.minecraft_version}-446-FORGE")
+
+    modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-84-FORGE")
+    implementation("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")*/
+
+    /*runtimeOnly("mezz.jei:jei-1.20.1-forge:15.20.0.106")*/
+
 
     modImplementation("com.tterrag.registrate:Registrate:${project.registrate_version}")
     // lombok

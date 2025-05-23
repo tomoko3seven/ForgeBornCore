@@ -14,15 +14,19 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
+import com.gregtechceu.gtceu.client.renderer.machine.QuantumTankRenderer;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
+import com.gregtechceu.gtceu.common.machine.storage.QuantumTankMachine;
 import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fluids.FluidType;
 import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
@@ -37,6 +41,7 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.frames;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
+import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.TANK_TOOLTIPS;
 import static com.gregtechceu.gtceu.common.machine.multiblock.steam.BoilerType.BRONZE;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
@@ -179,7 +184,21 @@ public class FBCMachines {
             .langValue("Fluid Output Hatch (Steam)")
             .register();
 
-
+    /*public static final MachineDefinition[] SUPER_MANA_TANK = registerTieredMachines("super_tank",
+            (holder, tier) -> new QuantumTankMachine(holder, tier,
+                    4000 * FluidType.BUCKET_VOLUME * (long) Math.pow(2, tier - 1)),
+            (tier, builder) -> builder
+                    .langValue("Super Tank " + LVT[tier])
+                    .blockProp(BlockBehaviour.Properties::dynamicShape)
+                    .rotationState(RotationState.ALL)
+                    .renderer(() -> new QuantumTankRenderer(tier))
+                    .hasTESR(true)
+                    .tooltipBuilder(TANK_TOOLTIPS)
+                    .tooltips(Component.translatable("gtceu.machine.quantum_tank.tooltip"),
+                            Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
+                                    FormattingUtil.formatNumbers(4_000_000 * (long) Math.pow(2, tier - 1))))
+                    .register(),
+            LOW_TIERS);*/
 
     public static MachineDefinition[] registerSimpleMachines(String name,
                                                              GTRecipeType recipeType,

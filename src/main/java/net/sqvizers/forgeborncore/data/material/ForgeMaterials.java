@@ -12,8 +12,16 @@ import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag
 
 public class ForgeMaterials {
 
+    //ForgeBorn
     public static Material SpiritSteel;
     public static Material Draconium;
+
+    public static Material Ichor;
+
+    //Undergarden
+    public static Material Cloggrum;
+    public static Material Froststeel;
+    public static Material Forgotten;
 
     //Nature`s Aura
     public static Material InfusedIron;
@@ -21,6 +29,10 @@ public class ForgeMaterials {
     public static Material SkyIngot;
     public static Material DepthsIngot;
 
+    //Ars Noveau
+    public static Material SourceMetall;
+
+    //Botania
     public static Material Livingwood;
     public static Material Livingrock;
     public static Material Manasteel;
@@ -28,7 +40,6 @@ public class ForgeMaterials {
     public static Material Terrasteel;
     public static Material Adamantium;
 
-    public static Material Ichor;
 
     public static void register() {
         //Nature`s Aura
@@ -40,7 +51,7 @@ public class ForgeMaterials {
         TaintedGold = new Material.Builder(forgeborncore.id("taintedgold"))
                 .ingot()
                 .color(0xb06a2e).iconSet(MaterialIconSet.ROUGH)
-                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR, GENERATE_RING)
                 .buildAndRegister().setFormula("?Au");
         SkyIngot = new Material.Builder(forgeborncore.id("skyingot"))
                 .ingot()
@@ -53,7 +64,7 @@ public class ForgeMaterials {
                 .flags(GENERATE_GEAR, GENERATE_ROD, GENERATE_PLATE, GENERATE_SMALL_GEAR)
                 .buildAndRegister().setFormula("?");
 
-        //Plates ONLY
+        //Botania
         Livingwood = new Material.Builder(forgeborncore.id("livingwood"))
                 .color(0x34140c).iconSet(MaterialIconSet.ROUGH)
                 .flags(GENERATE_PLATE, GENERATE_BOLT_SCREW)
@@ -62,21 +73,6 @@ public class ForgeMaterials {
                 .color(0xd7d7c8).iconSet(MaterialIconSet.ROUGH)
                 .flags(GENERATE_PLATE)
                 .buildAndRegister();
-        //Ingots
-        Draconium = new Material.Builder(forgeborncore.id("draconium"))
-                .ingot()
-                .color(0x6f42cf).secondaryColor(0x701068).iconSet(MaterialIconSet.BRIGHT)
-                .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
-                .toolStats(ToolProperty.Builder.of(4.0F, 2.0F, 130, 1)
-                        .attackSpeed(0.2F).enchantability(3).build())
-                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
-                .buildAndRegister().setFormula("Dc");
-        SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
-                .ingot()
-                .color(0x86684f).iconSet(MaterialIconSet.BRIGHT)
-                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
-                .buildAndRegister();
-
         Manasteel = new Material.Builder(forgeborncore.id("manasteel"))
                 .ingot()
                 .color(0x3BAFEA).secondaryColor(0x1E7FCB).iconSet(MaterialIconSet.SHINY)
@@ -103,11 +99,47 @@ public class ForgeMaterials {
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
                 .buildAndRegister().setFormula("Ad");
-        //Fluids
+        //ForgeBorn
+        Draconium = new Material.Builder(forgeborncore.id("draconium"))
+                .ingot()
+                .color(0x6f42cf).secondaryColor(0x701068).iconSet(MaterialIconSet.BRIGHT)
+                .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
+                .toolStats(ToolProperty.Builder.of(4.0F, 2.0F, 130, 1)
+                        .attackSpeed(0.2F).enchantability(3).build())
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("Dc");
+        SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
+                .ingot()
+                .color(0x86684f).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
         Ichor = new Material.Builder(forgeborncore.id("ichor"))
                 .color(0x6f42cf).secondaryColor(0x701068).iconSet(MaterialIconSet.BRIGHT)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
                 .buildAndRegister().setFormula("Ic");
+        //Ars Noveau
+        SourceMetall = new Material.Builder(forgeborncore.id("sourcemetall"))
+                .ingot()
+                .color(0x9B5FA9).iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+        //Undergarden
+        Cloggrum = new Material.Builder(forgeborncore.id("cloggrum"))
+                .ingot()
+                .color(0x8a735a).iconSet(MaterialIconSet.ROUGH)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+        Froststeel = new Material.Builder(forgeborncore.id("froststeel"))
+                .ingot()
+                .color(0xb3d0e2).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+        Forgotten = new Material.Builder(forgeborncore.id("forgotten"))
+                .ingot()
+                .color(0x3dd5a2).iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+
 
     }
 }
