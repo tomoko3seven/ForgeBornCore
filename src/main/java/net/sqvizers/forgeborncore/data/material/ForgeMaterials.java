@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.ToolProperty;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.FluidState;
+import net.sqvizers.forgeborncore.common.data.materials.FBMaterialSet;
 import net.sqvizers.forgeborncore.forgeborncore;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
@@ -14,6 +15,7 @@ public class ForgeMaterials {
 
     //ForgeBorn
     public static Material SpiritSteel;
+    public static Material Blooming;
     public static Material Draconium;
 
     public static Material Ichor;
@@ -93,6 +95,12 @@ public class ForgeMaterials {
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
                 .buildAndRegister().setFormula("Ts");
+        Blooming = new Material.Builder(forgeborncore.id("blooming"))
+                .ingot()
+                .iconSet(FBMaterialSet.BLOOMING)
+                .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SMALL_GEAR)
+                .buildAndRegister().setFormula("?");
         Adamantium = new Material.Builder(forgeborncore.id("adamantium"))
                 .ingot()
                 .color(0x8B0000).secondaryColor(0x4B0000).iconSet(MaterialIconSet.BRIGHT)
