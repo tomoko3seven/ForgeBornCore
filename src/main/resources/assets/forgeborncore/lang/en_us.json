@@ -15,8 +15,12 @@
   "gtceu.machine.steam_fluid_hatch_warning": "Import Hatch for Fluids. IS NOT FOR STEAM!",
 
   "item.forgeborncore.lv_botanical_circuit": "Basic Botanical Circuit",
-  "forgeborncore.lv_botanical_circuit.tooltip.1": "§8First Botanical Circuit",
+  "forgeborncore.lv_botanical_circuit.tooltip.1": "§8Your First Botanical Circuit",
   "forgeborncore.lv_botanical_circuit.tooltip.2": "§aLV Botanical Circuit",
+
+  "item.forgeborncore.lv_botanical_circuit": "Basic Wizard Circuit",
+  "forgeborncore.lv_botanical_circuit.tooltip.1": "§8Your First Wizard Circuit",
+  "forgeborncore.lv_botanical_circuit.tooltip.2": "§aLV Wizard Circuit",
 
 
   "material.forgeborncore.spiritsteel": "Spirit Steel",

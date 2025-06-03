@@ -65,7 +65,16 @@ public class FBItems {
 
 
     //Ars Noveau Circuits
-
+    public static final ItemEntry<ComponentItem> LV_WIRARD_CIRCUIT = REGISTRATE
+            .item("lv_wizard_circuit", ComponentItem::create)
+            .lang("Basic Wizard Circuit")
+            .properties(p -> p.stacksTo(64))
+            .onRegister(attach(new TooltipBehavior(tooltips -> {
+                tooltips.add(Component.translatable("forgeborncore.lv_wizard_circuit.tooltip.1"));
+                tooltips.add(Component.translatable("forgeborncore.lv_wizard_circuit.tooltip.2"));
+            })))
+            .defaultModel()
+            .register();
 
     //Craft-Materials
     public static final ItemEntry<ComponentItem> STONE_GEAR = REGISTRATE

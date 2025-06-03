@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "forgeborncore:item/lv_wizard_circuit"
+  }
+}
