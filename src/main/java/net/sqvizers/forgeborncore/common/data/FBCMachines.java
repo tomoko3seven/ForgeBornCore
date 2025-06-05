@@ -1,5 +1,9 @@
 package net.sqvizers.forgeborncore.common.data;
 
+import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
+import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
+import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
@@ -14,23 +18,18 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
-import com.gregtechceu.gtceu.client.renderer.machine.QuantumTankRenderer;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
-import com.gregtechceu.gtceu.common.machine.storage.QuantumTankMachine;
 import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
-import com.gregtechceu.gtceu.utils.FormattingUtil;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
+
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fluids.FluidType;
-import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
-import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
-import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
+
+import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,17 +40,18 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.frames;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
-import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.TANK_TOOLTIPS;
-import static com.gregtechceu.gtceu.common.machine.multiblock.steam.BoilerType.BRONZE;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
 
 public class FBCMachines {
+
     public final static int[] ELECTRIC_TIERS = GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV);
     public final static int[] LOW_TIERS = GTValues.tiersBetween(LV, EV);
     public final static int[] HIGH_TIERS = GTValues.tiersBetween(IV, GTCEuAPI.isHighTier() ? OpV : UHV);
-    public static final Int2IntFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 4 : tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) * FluidType.BUCKET_VOLUME;
+    public static final Int2IntFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 4 :
+            tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) *
+            FluidType.BUCKET_VOLUME;
 
     public static final MultiblockMachineDefinition HIGH_PRESSURE_ASSEMBLER = GTRegistration.REGISTRATE
             .multiblock("high_pressure_assembler", WeakSteamParallelMultiBlockMachine::new)
@@ -137,21 +137,22 @@ public class FBCMachines {
             .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
                     GTCEu.id("block/machines/canner"))
             .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip"))
-                    .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))
             .register();
 
-    public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE.multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
+    public static final MachineDefinition STEAM_FORGE_HAMMER = REGISTRATE
+            .multiblock("steam_forge_hammer", SteamParallelMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .appearanceBlock(CASING_BRONZE_BRICKS)
             .recipeType(GTRecipeTypes.FORGE_HAMMER_RECIPES)
             .recipeModifier(WeakSteamParallelMultiBlockMachine::recipeModifier, true)
             .addOutputLimit(ItemRecipeCapability.CAP, 1)
             .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle(" XXX ",  "     ", "     ", "     ", "     ", "     ", "     ")
-                    .aisle("XXXXX",  " XXX ", "     ", "     ", "     ", "  X  ", "     ")
-                    .aisle("XXXXX",  "XX XX", "X   X", "X I X", "X I X", "XXIXX", "  G  ")
-                    .aisle("XXXXX",  " XSX ", "     ", "     ", "     ", "  X  ", "     ")
-                    .aisle(" XXX ",  "     ", "     ", "     ", "     ", "     ", "     ")
+                    .aisle(" XXX ", "     ", "     ", "     ", "     ", "     ", "     ")
+                    .aisle("XXXXX", " XXX ", "     ", "     ", "     ", "  X  ", "     ")
+                    .aisle("XXXXX", "XX XX", "X   X", "X I X", "X I X", "XXIXX", "  G  ")
+                    .aisle("XXXXX", " XSX ", "     ", "     ", "     ", "  X  ", "     ")
+                    .aisle(" XXX ", "     ", "     ", "     ", "     ", "     ", "     ")
                     .where('S', Predicates.controller(blocks(definition.getBlock())))
                     .where('#', Predicates.air())
                     .where(' ', Predicates.any())
@@ -184,45 +185,52 @@ public class FBCMachines {
             .langValue("Fluid Output Hatch (Steam)")
             .register();
 
-    /*public static final MachineDefinition[] SUPER_MANA_TANK = registerTieredMachines("super_tank",
-            (holder, tier) -> new QuantumTankMachine(holder, tier,
-                    4000 * FluidType.BUCKET_VOLUME * (long) Math.pow(2, tier - 1)),
-            (tier, builder) -> builder
-                    .langValue("Super Tank " + LVT[tier])
-                    .blockProp(BlockBehaviour.Properties::dynamicShape)
-                    .rotationState(RotationState.ALL)
-                    .renderer(() -> new QuantumTankRenderer(tier))
-                    .hasTESR(true)
-                    .tooltipBuilder(TANK_TOOLTIPS)
-                    .tooltips(Component.translatable("gtceu.machine.quantum_tank.tooltip"),
-                            Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
-                                    FormattingUtil.formatNumbers(4_000_000 * (long) Math.pow(2, tier - 1))))
-                    .register(),
-            LOW_TIERS);*/
+    /*
+     * public static final MachineDefinition[] SUPER_MANA_TANK = registerTieredMachines("super_tank",
+     * (holder, tier) -> new QuantumTankMachine(holder, tier,
+     * 4000 * FluidType.BUCKET_VOLUME * (long) Math.pow(2, tier - 1)),
+     * (tier, builder) -> builder
+     * .langValue("Super Tank " + LVT[tier])
+     * .blockProp(BlockBehaviour.Properties::dynamicShape)
+     * .rotationState(RotationState.ALL)
+     * .renderer(() -> new QuantumTankRenderer(tier))
+     * .hasTESR(true)
+     * .tooltipBuilder(TANK_TOOLTIPS)
+     * .tooltips(Component.translatable("gtceu.machine.quantum_tank.tooltip"),
+     * Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
+     * FormattingUtil.formatNumbers(4_000_000 * (long) Math.pow(2, tier - 1))))
+     * .register(),
+     * LOW_TIERS);
+     */
 
     public static MachineDefinition[] registerSimpleMachines(String name,
                                                              GTRecipeType recipeType,
                                                              Int2IntFunction tankScalingFunction,
                                                              int... tiers) {
-        return registerTieredMachines(name, (holder, tier) -> new SimpleTieredMachine(holder, tier, tankScalingFunction), (tier, builder) -> builder
-                .langValue("%s %s %s".formatted(VLVH[tier], toEnglishName(name), VLVT[tier]))
-                .editableUI(SimpleTieredMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id(name), recipeType))
-                .rotationState(RotationState.NON_Y_AXIS)
-                .recipeType(recipeType)
-                .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
-                .workableTieredHullRenderer(GTCEu.id("block/machines/" + name))
-                .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, recipeType, tankScalingFunction.apply(tier), true))
-                .register(), tiers);
+        return registerTieredMachines(name,
+                (holder, tier) -> new SimpleTieredMachine(holder, tier, tankScalingFunction), (tier, builder) -> builder
+                        .langValue("%s %s %s".formatted(VLVH[tier], toEnglishName(name), VLVT[tier]))
+                        .editableUI(SimpleTieredMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id(name), recipeType))
+                        .rotationState(RotationState.NON_Y_AXIS)
+                        .recipeType(recipeType)
+                        .recipeModifier(
+                                GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
+                        .workableTieredHullRenderer(GTCEu.id("block/machines/" + name))
+                        .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, recipeType,
+                                tankScalingFunction.apply(tier), true))
+                        .register(),
+                tiers);
     }
 
-    public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType, Int2IntFunction tankScalingFunction) {
+    public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType,
+                                                             Int2IntFunction tankScalingFunction) {
         return registerSimpleMachines(name, recipeType, tankScalingFunction, ELECTRIC_TIERS);
     }
 
     public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType) {
         return registerSimpleMachines(name, recipeType, defaultTankSizeFunction);
     }
-    
+
     public static MachineDefinition[] registerTieredMachines(String name,
                                                              BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
                                                              BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
@@ -230,7 +238,8 @@ public class FBCMachines {
         MachineDefinition[] definitions = new MachineDefinition[tiers.length];
         for (int i = 0; i < tiers.length; i++) {
             int tier = tiers[i];
-            var register =  REGISTRATE.machine(GTValues.VN[tier].toLowerCase() + "_" + name, holder -> factory.apply(holder, tier))
+            var register = REGISTRATE
+                    .machine(GTValues.VN[tier].toLowerCase() + "_" + name, holder -> factory.apply(holder, tier))
                     .tier(tier);
             definitions[i] = builder.apply(tier, register);
         }
@@ -243,17 +252,20 @@ public class FBCMachines {
         return null;
     }
 
-    public static Component[] workableTiered(int tier, long voltage, long energyCapacity, GTRecipeType recipeType, long tankCapacity, boolean input) {
+    public static Component[] workableTiered(int tier, long voltage, long energyCapacity, GTRecipeType recipeType,
+                                             long tankCapacity, boolean input) {
         List<Component> tooltipComponents = new ArrayList<>();
-        tooltipComponents.add(input ? Component.translatable("gtceu.universal.tooltip.voltage_in", voltage, GTValues.VNF[tier]) :
-                Component.translatable("gtceu.universal.tooltip.voltage_out", voltage, GTValues.VNF[tier]));
-        tooltipComponents.add(Component.translatable("gtceu.universal.tooltip.energy_storage_capacity", energyCapacity));
-        if (recipeType.getMaxInputs(FluidRecipeCapability.CAP) > 0 || recipeType.getMaxOutputs(FluidRecipeCapability.CAP) > 0)
-            tooltipComponents.add(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity", tankCapacity));
+        tooltipComponents
+                .add(input ? Component.translatable("gtceu.universal.tooltip.voltage_in", voltage, GTValues.VNF[tier]) :
+                        Component.translatable("gtceu.universal.tooltip.voltage_out", voltage, GTValues.VNF[tier]));
+        tooltipComponents
+                .add(Component.translatable("gtceu.universal.tooltip.energy_storage_capacity", energyCapacity));
+        if (recipeType.getMaxInputs(FluidRecipeCapability.CAP) > 0 ||
+                recipeType.getMaxOutputs(FluidRecipeCapability.CAP) > 0)
+            tooltipComponents
+                    .add(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity", tankCapacity));
         return tooltipComponents.toArray(Component[]::new);
     }
 
-    public static void init() {
-
-    }
+    public static void init() {}
 }

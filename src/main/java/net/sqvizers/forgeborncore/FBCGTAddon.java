@@ -1,25 +1,26 @@
 package net.sqvizers.forgeborncore;
 
 import net.sqvizers.forgeborncore.api.registries.FBCRegistries;
+
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import java.util.function.Consumer;
 
 @GTAddon
 public class FBCGTAddon implements IGTAddon {
+
     @Override
     public GTRegistrate getRegistrate() {
         return FBCRegistries.REGISTRATE;
     }
 
     @Override
-    public void initializeAddon() {
-
-    }
+    public void initializeAddon() {}
 
     @Override
     public String addonModId() {

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "refmap": "forgeborncore.refmap.json",
+  "package": "net.sqvizers.forgeborncore.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

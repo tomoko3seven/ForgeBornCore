@@ -1,6 +1,7 @@
 package net.sqvizers.forgeborncore.common;
 
-import com.tterrag.registrate.util.entry.BlockEntry;
+import net.sqvizers.forgeborncore.forgeborncore;
+
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -10,14 +11,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sqvizers.forgeborncore.forgeborncore;
 
 import java.util.function.Supplier;
 
 public class FBBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, forgeborncore.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+            forgeborncore.MOD_ID);
 
     public static final RegistryObject<Block> COBBLESTONE_BRICKS = registerBlock("cobblestone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.STONE)));
@@ -32,5 +32,4 @@ public class FBBlocks {
         ForgeRegistries ModItems;
         return FBItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
-    
 }
