@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.config.ConfigHolder;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.RegistryObject;
 import net.sqvizers.forgeborncore.api.item.HungerCharmItem;
 import net.sqvizers.forgeborncore.api.item.armor.NanoMuscleSpaceSuite;
@@ -12,6 +13,7 @@ import net.sqvizers.forgeborncore.api.item.armor.SpaceGearItem;
 import net.sqvizers.forgeborncore.api.item.gun.BulletItem;
 import net.sqvizers.forgeborncore.api.item.gun.GunItem;
 import net.sqvizers.forgeborncore.api.item.gun.IBullet;
+import net.sqvizers.forgeborncore.api.item.sword.FrostmourneItem;
 import net.sqvizers.forgeborncore.common.data.tag.item.FBItemTags;
 import net.sqvizers.forgeborncore.forgeborncore;
 
@@ -116,6 +118,13 @@ public class FBItems {
     public static final ItemEntry<GunItem> RIFLE = REGISTRATE
             .item("rifle", props -> new GunItem(new Item.Properties().durability(2014), 15, 3, 60, 1.2))
             .lang("Rifle")
+            .properties(p -> p.stacksTo(1))
+            .register();
+
+    public static final ItemEntry<FrostmourneItem> FROSTMOURNE = REGISTRATE
+            .item("frostmourne", props -> new FrostmourneItem(Tiers.DIAMOND, 3, -2.4F, new Item.Properties()))
+                    /*(new Item.Properties().durability(-1).rarity(Rarity.RARE), 3, -2.4F, -2.4F))*/
+            .lang("Frostmourne")
             .properties(p -> p.stacksTo(1))
             .register();
 

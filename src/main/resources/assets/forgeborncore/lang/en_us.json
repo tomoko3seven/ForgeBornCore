@@ -51,6 +51,8 @@
   "tooltip.forgeborncore.shift": "§7Hold §fSHIFT§7 for stats§r",
 
 
+  "item.forgeborncore.frostmourne": "Frostmourne",
+
   "item.forgeborncore.rifle": "Rifle",
   "tooltip.forgeborncore.bullet.damage": "%d damage",
   "tooltip.forgeborncore.gun.firerate": "§2Fire delay: §f%d§7 (§f%d§7 RPM)§r",
