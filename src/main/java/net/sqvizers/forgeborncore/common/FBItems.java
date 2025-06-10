@@ -1,5 +1,18 @@
 package net.sqvizers.forgeborncore.common;
 
+import com.gregtechceu.gtceu.common.item.armor.GTArmorMaterials;
+import com.gregtechceu.gtceu.config.ConfigHolder;
+import earth.terrarium.adastra.common.tags.ModItemTags;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Rarity;
+import net.minecraftforge.registries.RegistryObject;
+import net.sqvizers.forgeborncore.api.item.HungerCharmItem;
+import net.sqvizers.forgeborncore.api.item.armor.NanoMuscleSpaceSuite;
+import net.sqvizers.forgeborncore.api.item.armor.SpaceGearItem;
+import net.sqvizers.forgeborncore.api.item.gun.BulletItem;
+import net.sqvizers.forgeborncore.api.item.gun.GunItem;
+import net.sqvizers.forgeborncore.api.item.gun.IBullet;
+import net.sqvizers.forgeborncore.common.data.tag.item.FBItemTags;
 import net.sqvizers.forgeborncore.forgeborncore;
 
 import com.gregtechceu.gtceu.api.item.ComponentItem;
@@ -72,26 +85,39 @@ public class FBItems {
             .register();
 
     // Craft-Materials
-    public static final ItemEntry<ComponentItem> STONE_GEAR = REGISTRATE
-            .item("stone_gear", ComponentItem::create)
-            .lang("Stone Gear")
-            .properties(p -> p.stacksTo(64))
+
+    public static ItemEntry<SpaceGearItem> SPACE_NANO_CHESTPLATE = REGISTRATE
+            .item("space_nanomuscle_chestplate",
+                    (p) -> new SpaceGearItem(GTArmorMaterials.ARMOR, ArmorItem.Type.CHESTPLATE, 5000, p)
+                            .setArmorLogic(new NanoMuscleSpaceSuite(ArmorItem.Type.CHESTPLATE, 512,
+                                    6_400_000L * (long) Math.max(1,
+                                            Math.pow(4, ConfigHolder.INSTANCE.tools.voltageTierNanoSuit - 3)),
+                                    ConfigHolder.INSTANCE.tools.voltageTierNanoSuit)))
+            .tag(FBItemTags.NANOMUSCLE_SPACE_SUITE, ModItemTags.SPACE_SUITS, ModItemTags.FREEZE_RESISTANT_ARMOR,
+                    ModItemTags.HEAT_RESISTANT_ARMOR)
+            .lang("NanoMuscle™ Space Suite Chestplate")
+            .properties(p -> p.rarity(Rarity.RARE))
             .register();
 
-    /*
-     * public static ItemEntry<SpaceArmorComponentItem> SPACE_NANO_CHESTPLATE = REGISTRATE
-     * .item("space_nanomuscle_chestplate",
-     * (p) -> new SpaceArmorComponentItem(GTArmorMaterials.ARMOR, ArmorItem.Type.CHESTPLATE, 5000, p)
-     * .setArmorLogic(new NanoMuscleSpaceSuite(ArmorItem.Type.CHESTPLATE, 512,
-     * 6_400_000L * (long) Math.max(1,
-     * Math.pow(4, ConfigHolder.INSTANCE.tools.voltageTierNanoSuit - 3)),
-     * ConfigHolder.INSTANCE.tools.voltageTierNanoSuit)))
-     * .tag(CosmicItemTags.NANOMUSCLE_SPACE_SUITE, ModItemTags.SPACE_SUITS, ModItemTags.FREEZE_RESISTANT_ARMOR,
-     * ModItemTags.HEAT_RESISTANT_ARMOR)
-     * .lang("NanoMuscle™ Space Suite Chestplate")
-     * .properties(p -> p.rarity(Rarity.RARE))
-     * .register();
-     */
+    public static ItemEntry<HungerCharmItem> HUNGER_CHARM = REGISTRATE
+            .item("hunger_charm", HungerCharmItem::new)
+            .lang("Hunger Charm")
+            .properties(p -> p.stacksTo(1))
+            .defaultModel()
+            .register();
+
+    public static final ItemEntry<BulletItem> SIMPLE_BULLET = REGISTRATE
+            .item("simple_bullet", props -> new BulletItem(new Item.Properties(), 7))
+            .lang("Simple Bullet")
+            .properties(p -> p.stacksTo(64))
+            .defaultModel()
+            .register();
+
+    public static final ItemEntry<GunItem> RIFLE = REGISTRATE
+            .item("rifle", props -> new GunItem(new Item.Properties().durability(2014), 15, 3, 60, 1.2))
+            .lang("Rifle")
+            .properties(p -> p.stacksTo(1))
+            .register();
 
     public static <T extends ComponentItem> NonNullConsumer<T> attach(IItemComponent... components) {
         return item -> item.attachComponents(components);

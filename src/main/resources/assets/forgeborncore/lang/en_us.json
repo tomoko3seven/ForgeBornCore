@@ -41,5 +41,19 @@
   "material.forgeborncore.skyingot": "Sky Metall",
   "material.forgeborncore.depthsingot": "Depths Metall",
 
-  "material.forgeborncore.ichor": "Ichor"
+  "material.forgeborncore.ichor": "Ichor",
+
+
+  "item.forgeborncore.simple_bullet": "Simple Bullet",
+
+  "entity.forgeborncore.bullet": "Bullet Entity",
+
+  "tooltip.forgeborncore.shift": "§7Hold §fSHIFT§7 for stats§r",
+
+
+  "item.forgeborncore.rifle": "Rifle",
+  "tooltip.forgeborncore.bullet.damage": "%d damage",
+  "tooltip.forgeborncore.gun.firerate": "§2Fire delay: §f%d§7 (§f%d§7 RPM)§r",
+  "tooltip.forgeborncore.gun.accuracy": "§2Accuracy: §f%s§r",
+  "tooltip.forgeborncore.gun.accuracy.perfect": "§2Accuracy: §Perfect§r"
 }

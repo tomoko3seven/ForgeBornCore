@@ -1,9 +1,11 @@
 package net.sqvizers.forgeborncore;
 
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.sqvizers.forgeborncore.api.registries.FBCRegistries;
 import net.sqvizers.forgeborncore.common.FBItems;
 import net.sqvizers.forgeborncore.common.data.FBCCreativeModeTabs;
 import net.sqvizers.forgeborncore.common.data.FBCMachines;
+import net.sqvizers.forgeborncore.common.entity.ModEntities;
 import net.sqvizers.forgeborncore.data.FBCDatagen;
 import net.sqvizers.forgeborncore.data.material.ForgeMaterials;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
@@ -36,11 +38,12 @@ public class forgeborncore {
 
     public forgeborncore() {
         forgeborncore.init();
-        var bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.register(this);
-        bus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModEntities.ENTITIES.register(modEventBus);
+        modEventBus.register(this);
+        modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
 
-        bus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
     }
 
     public static void init() {
@@ -59,6 +62,7 @@ public class forgeborncore {
     public void registerMaterialRegistry(MaterialRegistryEvent event) {
         MATERIAL_REGISTRY = GTCEuAPI.materialManager.createRegistry(forgeborncore.MOD_ID);
     }
+
 
     @SubscribeEvent
     public void registerMaterials(MaterialEvent event) {

@@ -1,0 +1,15 @@
+{
+  "item.gun.shoot": {
+    "category": "players",
+    "subtitle": "subtitles.forgeborncore.item.gun.shoot",
+    "sounds": [
+      "forgeborncore:gun1"
+    ]
+  },
+
+  "item.shotgun.shoot": {
+    "category": "players",
+    "subtitle": "subtitles.forgeborncore.item.shotgun.shoot",
+    "sounds": [ "forgeborncore:shotgun" ]
+  }
+}
