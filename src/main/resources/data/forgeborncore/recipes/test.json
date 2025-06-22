@@ -1,0 +1,14 @@
+{
+  "type": "ars_nouveau:imbuement",
+  "input": {
+    "item": "minecraft:iron_ingot"
+  },
+  "output": {
+    "item": "minecraft:diamond"
+  },
+  "source": 500,
+  "pedestalItems": [
+    { "item": "minecraft:lapis_lazuli" },
+    { "item": "minecraft:redstone" }
+  ]
+}

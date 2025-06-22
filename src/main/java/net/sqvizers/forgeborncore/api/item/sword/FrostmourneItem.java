@@ -21,6 +21,7 @@ public class FrostmourneItem extends SwordItem {
         if (!player.getCooldowns().isOnCooldown(this)) {
             p_43279_.addEffect(new MobEffectInstance(ModEffects.STUN.get(), 50, 20));
             player.getCooldowns().addCooldown(this, 50);
+            System.out.println("Succesful");
         }
 
         return super.hurtEnemy(p_43278_, p_43279_, p_43280_);

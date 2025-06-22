@@ -13,6 +13,7 @@ import net.sqvizers.forgeborncore.api.item.armor.SpaceGearItem;
 import net.sqvizers.forgeborncore.api.item.gun.BulletItem;
 import net.sqvizers.forgeborncore.api.item.gun.GunItem;
 import net.sqvizers.forgeborncore.api.item.gun.IBullet;
+import net.sqvizers.forgeborncore.api.item.gun.ShotgunItem;
 import net.sqvizers.forgeborncore.api.item.sword.FrostmourneItem;
 import net.sqvizers.forgeborncore.common.data.tag.item.FBItemTags;
 import net.sqvizers.forgeborncore.forgeborncore;
@@ -121,9 +122,14 @@ public class FBItems {
             .properties(p -> p.stacksTo(1))
             .register();
 
+    public static final ItemEntry<ShotgunItem> PULSE_SHOTGUN = REGISTRATE
+            .item("pulse_shotgun", props -> new ShotgunItem(new Item.Properties().durability(2014), 0, 1, 30, 2, 5))
+            .lang("Pulse Shotgun")
+            .properties(p -> p.stacksTo(1))
+            .register();
+
     public static final ItemEntry<FrostmourneItem> FROSTMOURNE = REGISTRATE
-            .item("frostmourne", props -> new FrostmourneItem(Tiers.DIAMOND, 3, -2.4F, new Item.Properties()))
-                    /*(new Item.Properties().durability(-1).rarity(Rarity.RARE), 3, -2.4F, -2.4F))*/
+            .item("frostmourne", props -> new FrostmourneItem(Tiers.NETHERITE, 3, -2.4F, new Item.Properties()))
             .lang("Frostmourne")
             .properties(p -> p.stacksTo(1))
             .register();

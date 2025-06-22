@@ -1,5 +1,8 @@
 package net.sqvizers.forgeborncore.common.data;
 
+import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
+import com.gregtechceu.gtceu.client.renderer.machine.WorkableSteamMachineRenderer;
+import it.unimi.dsi.fastutil.Pair;
 import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
@@ -40,6 +43,7 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.frames;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
+import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerSteamMachines;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
@@ -52,6 +56,11 @@ public class FBCMachines {
     public static final Int2IntFunction defaultTankSizeFunction = tier -> (tier <= GTValues.LV ? 4 :
             tier == GTValues.MV ? 12 : tier == GTValues.HV ? 16 : tier == GTValues.EV ? 32 : 64) *
             FluidType.BUCKET_VOLUME;
+
+
+    ///////////////////////////
+    /// MULTIBLOCK MACHINES ///
+    ///////////////////////////
 
     public static final MultiblockMachineDefinition HIGH_PRESSURE_ASSEMBLER = GTRegistration.REGISTRATE
             .multiblock("high_pressure_assembler", WeakSteamParallelMultiBlockMachine::new)
@@ -185,23 +194,38 @@ public class FBCMachines {
             .langValue("Fluid Output Hatch (Steam)")
             .register();
 
-    /*
-     * public static final MachineDefinition[] SUPER_MANA_TANK = registerTieredMachines("super_tank",
-     * (holder, tier) -> new QuantumTankMachine(holder, tier,
-     * 4000 * FluidType.BUCKET_VOLUME * (long) Math.pow(2, tier - 1)),
-     * (tier, builder) -> builder
-     * .langValue("Super Tank " + LVT[tier])
-     * .blockProp(BlockBehaviour.Properties::dynamicShape)
-     * .rotationState(RotationState.ALL)
-     * .renderer(() -> new QuantumTankRenderer(tier))
-     * .hasTESR(true)
-     * .tooltipBuilder(TANK_TOOLTIPS)
-     * .tooltips(Component.translatable("gtceu.machine.quantum_tank.tooltip"),
-     * Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
-     * FormattingUtil.formatNumbers(4_000_000 * (long) Math.pow(2, tier - 1))))
-     * .register(),
-     * LOW_TIERS);
-     */
+
+    ///////////////////////
+    /// SIMPLE MACHINES ///
+    ///////////////////////
+
+    //Maybe in Future
+    /*public static final Pair<MachineDefinition, MachineDefinition> STEAM_WIREMILL = registerSteamMachines(
+            "steam_wiremill", SimpleSteamMachine::new, (pressure, builder) -> builder
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .recipeType(GTRecipeTypes.WIREMILL_RECIPES)
+                    .recipeModifier(SimpleSteamMachine::recipeModifier)
+                    .addOutputLimit(ItemRecipeCapability.CAP, 1)
+                    .renderer(() -> new WorkableSteamMachineRenderer(pressure, GTCEu.id("block/machines/wiremill")))
+                    .register());
+    public static final Pair<MachineDefinition, MachineDefinition> STEAM_BENDER = registerSteamMachines(
+            "steam_bender", SimpleSteamMachine::new, (pressure, builder) -> builder
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .recipeType(GTRecipeTypes.BENDER_RECIPES)
+                    .recipeModifier(SimpleSteamMachine::recipeModifier)
+                    .addOutputLimit(ItemRecipeCapability.CAP, 1)
+                    .renderer(() -> new WorkableSteamMachineRenderer(pressure, GTCEu.id("block/machines/bender")))
+                    .register());
+    public static final Pair<MachineDefinition, MachineDefinition> STEAM_EXTRUDER = registerSteamMachines(
+            "steam_extruder", SimpleSteamMachine::new, (pressure, builder) -> builder
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .recipeType(GTRecipeTypes.EXTRUDER_RECIPES)
+                    .recipeModifier(SimpleSteamMachine::recipeModifier)
+                    .addOutputLimit(ItemRecipeCapability.CAP, 1)
+                    .renderer(() -> new WorkableSteamMachineRenderer(pressure, GTCEu.id("block/machines/extruder")))
+                    .register());*/
+
+    /// ////////////////////////////////////////////
 
     public static MachineDefinition[] registerSimpleMachines(String name,
                                                              GTRecipeType recipeType,

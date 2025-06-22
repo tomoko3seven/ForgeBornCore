@@ -1,10 +1,22 @@
 package net.sqvizers.forgeborncore;
 
+import com.gregtechceu.gtceu.api.addon.GTAddon;
+import com.gregtechceu.gtceu.api.addon.IGTAddon;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
+import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.gregtechceu.gtceu.common.data.GTFluids;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import earth.terrarium.adastra.common.registry.ModFluids;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.sqvizers.forgeborncore.api.data.FBMaterialIconType;
 import net.sqvizers.forgeborncore.api.registries.FBCRegistries;
 import net.sqvizers.forgeborncore.common.FBItems;
 import net.sqvizers.forgeborncore.common.data.FBCCreativeModeTabs;
 import net.sqvizers.forgeborncore.common.data.FBCMachines;
+import net.sqvizers.forgeborncore.common.data.flags.FBFlags;
+import net.sqvizers.forgeborncore.common.data.tag.FBTagPrefix;
 import net.sqvizers.forgeborncore.common.entity.ModEntities;
 import net.sqvizers.forgeborncore.data.FBCDatagen;
 import net.sqvizers.forgeborncore.data.material.ForgeMaterials;
@@ -26,15 +38,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
-
 @Mod(forgeborncore.MOD_ID)
-public class forgeborncore {
+public final class forgeborncore {
 
     public static final String MOD_ID = "forgeborncore", NAME = "ForgeBorn Core";;
     public static final Logger LOGGER = LoggerFactory.getLogger(forgeborncore.class);
     public static MaterialRegistry MATERIAL_REGISTRY;
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
 
     public forgeborncore() {
         forgeborncore.init();
@@ -48,21 +61,15 @@ public class forgeborncore {
 
     public static void init() {
         ConfigHolder.init();
-        FBCRegistries.REGISTRATE.registerRegistrate();
         FBCCreativeModeTabs.init();
-        FBItems.init();
         FBCDatagen.init();
-    }
-
-    public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        FBMaterialIconType.init();
     }
 
     @SubscribeEvent
     public void registerMaterialRegistry(MaterialRegistryEvent event) {
         MATERIAL_REGISTRY = GTCEuAPI.materialManager.createRegistry(forgeborncore.MOD_ID);
     }
-
 
     @SubscribeEvent
     public void registerMaterials(MaterialEvent event) {
@@ -74,14 +81,12 @@ public class forgeborncore {
         FBCMachines.init();
     }
 
+    @SubscribeEvent
+    public void registerFlags(GTCEuAPI.RegisterEvent<ResourceLocation, Goal.Flag> event) {
+        FBFlags.init();
+    }
+
     public void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         FBRecipeTypes.init();
     }
-
-    /*
-     * @SubscribeEvent
-     * public void modifyExistingMaterials(PostMaterialEvent event) {
-     * ForgeMaterials.modifyMaterials();
-     * }
-     */
 }

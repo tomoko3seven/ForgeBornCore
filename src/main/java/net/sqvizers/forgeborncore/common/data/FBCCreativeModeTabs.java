@@ -17,7 +17,7 @@ public class FBCCreativeModeTabs {
             builder -> builder
                     .displayItems(
                             new GTCreativeModeTabs.RegistrateDisplayItemsGenerator(forgeborncore.MOD_ID, REGISTRATE))
-                    .title(REGISTRATE.addLang("itemGroup", forgeborncore.id("creative_tab"), "ForgeBorn Core"))
+                    .title(REGISTRATE.addLang("itemGroup", forgeborncore.id("fb_creative_tab"), "ForgeBorn Core"))
                     .icon(FBItems.LV_BOTANICAL_CIRCUIT::asStack)
                     .build())
             .register();

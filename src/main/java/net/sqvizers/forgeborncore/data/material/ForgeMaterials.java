@@ -1,5 +1,6 @@
 package net.sqvizers.forgeborncore.data.material;
 
+import net.sqvizers.forgeborncore.common.data.flags.FBFlags;
 import net.sqvizers.forgeborncore.common.data.materials.FBMaterialSet;
 import net.sqvizers.forgeborncore.forgeborncore;
 
@@ -11,11 +12,13 @@ import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.FluidState;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
+import static net.sqvizers.forgeborncore.common.data.flags.FBFlags.GENERATE_NANITES;
 
 public class ForgeMaterials {
 
     // ForgeBorn
     public static Material SpiritSteel;
+    public static Material Mythril;
     public static Material Blooming;
     public static Material Draconium;
 
@@ -39,6 +42,7 @@ public class ForgeMaterials {
     public static Material Livingwood;
     public static Material Livingrock;
     public static Material Manasteel;
+    public static Material AnnealedManasteel;
     public static Material Elementium;
     public static Material Terrasteel;
     public static Material Adamantium;
@@ -77,9 +81,16 @@ public class ForgeMaterials {
                 .buildAndRegister();
         Manasteel = new Material.Builder(forgeborncore.id("manasteel"))
                 .ingot()
-                .color(0x3BAFEA).secondaryColor(0x1E7FCB).iconSet(MaterialIconSet.SHINY)
+                .color(0x3BAFEA).secondaryColor(0x1E7FCB).iconSet(MaterialIconSet.BRIGHT)
                 .cableProperties(GTValues.V[GTValues.LV], 8, 0, true)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD,
+                        GENERATE_SMALL_GEAR, GENERATE_PLATE)
+                .buildAndRegister().setFormula("Ms");
+        AnnealedManasteel = new Material.Builder(forgeborncore.id("annealed_manasteel"))
+                .ingot()
+                .color(0x6A8FA4).secondaryColor(0x4F6D84).iconSet(MaterialIconSet.BRIGHT)
+                .cableProperties(GTValues.V[GTValues.LV], 8, 0, true)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR, GENERATE_PLATE)
                 .buildAndRegister().setFormula("Ms");
@@ -95,7 +106,7 @@ public class ForgeMaterials {
                 .ingot()
                 .color(0x47FF8D).secondaryColor(0x2ECF78).iconSet(MaterialIconSet.BRIGHT)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
-                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD,
+            .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_FINE_WIRE, GENERATE_NANITES, GENERATE_ROD, GENERATE_DENSE, GENERATE_LONG_ROD, FBFlags.GENERATE_REINFORCED, FBFlags.GENERATE_INFUSED,
                         GENERATE_SMALL_GEAR)
                 .buildAndRegister().setFormula("Ts");
         Blooming = new Material.Builder(forgeborncore.id("blooming"))
@@ -125,6 +136,12 @@ public class ForgeMaterials {
         SpiritSteel = new Material.Builder(forgeborncore.id("spiritsteel"))
                 .ingot()
                 .color(0x86684f).iconSet(MaterialIconSet.BRIGHT)
+                .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
+                        GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+        Mythril = new Material.Builder(forgeborncore.id("mythril"))
+                .ingot()
+                .color(0x657EA3).secondaryColor(0x6A93FF).iconSet(MaterialIconSet.BRIGHT)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR)
                 .buildAndRegister();
