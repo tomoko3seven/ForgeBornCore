@@ -1,10 +1,10 @@
 package net.sqvizers.forgeborncore.common.data;
 
-import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
-import com.gregtechceu.gtceu.client.renderer.machine.WorkableSteamMachineRenderer;
-import it.unimi.dsi.fastutil.Pair;
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
+import com.gregtechceu.gtceu.common.data.*;
 import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
+import net.sqvizers.forgeborncore.forgeborncore;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -21,10 +21,6 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
-import com.gregtechceu.gtceu.common.data.GCYMBlocks;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
@@ -39,16 +35,21 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
-import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
-import static com.gregtechceu.gtceu.api.pattern.Predicates.frames;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
+import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
-import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerSteamMachines;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
+import static net.sqvizers.forgeborncore.common.data.FBBlocks.MANASTEEL_CASING;
+import static vazkii.botania.common.block.BotaniaBlocks.*;
 
 public class FBCMachines {
+
+    static {
+        REGISTRATE.creativeModeTab(() -> FBCreativeModeTabs.FB_MACHINES);
+    }
 
     public final static int[] ELECTRIC_TIERS = GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV);
     public final static int[] LOW_TIERS = GTValues.tiersBetween(LV, EV);
@@ -79,13 +80,13 @@ public class FBCMachines {
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)
                                     .setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
-                    .where(' ', Predicates.any())
+                    .where(' ', any())
                     .where('Y', Predicates.controller(blocks(definition.getBlock())))
                     .where('A', blocks(STEEL_HULL.get()).setMinGlobalLimited(11)
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
                     .where('D', blocks(CASING_STEEL_GEARBOX.get()))
                     .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     GTCEu.id("block/multiblock/implosion_compressor"))
             .tooltips(Component.translatable("forgeborncore.multiblock.hpa.tooltip.1"),
                     Component.translatable("forgeborncore.multiblock.hpa.tooltip.2"))
@@ -111,12 +112,12 @@ public class FBCMachines {
                                     .setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1).setExactLimit(1)))
-                    .where(' ', Predicates.any())
+                    .where(' ', any())
                     .where('C', Predicates.controller(blocks(definition.getBlock())))
                     .where('B', blocks(BRONZE_HULL.get()))
                     .where('A', blocks(CASING_BRONZE_PIPE.get()))
                     .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
+            .workableCasingModel(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
                     GTCEu.id("block/machines/electrolyzer"))
             .tooltips(Component.translatable("forgeborncore.multiblock.steam_mixer.tooltip"))
             .register();
@@ -138,12 +139,12 @@ public class FBCMachines {
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
                                     .setExactLimit(1)))
-                    .where(' ', Predicates.any())
+                    .where(' ', any())
                     .where('C', Predicates.controller(blocks(definition.getBlock())))
                     .where('B', blocks(BRONZE_BRICKS_HULL.get()))
                     .where('F', Predicates.frames(GTMaterials.Bronze))
                     .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
+            .workableCasingModel(forgeborncore.id("block/casings/gcym/industrial_steam_casing"),
                     GTCEu.id("block/machines/canner"))
             .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip"))
             .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))
@@ -164,7 +165,7 @@ public class FBCMachines {
                     .aisle(" XXX ", "     ", "     ", "     ", "     ", "     ", "     ")
                     .where('S', Predicates.controller(blocks(definition.getBlock())))
                     .where('#', Predicates.air())
-                    .where(' ', Predicates.any())
+                    .where(' ', any())
                     .where('I', Predicates.blocks(IRON_BLOCK))
                     .where('G', Predicates.blocks(CASING_BRONZE_GEARBOX.get()))
                     .where('X', blocks(CASING_BRONZE_BRICKS.get()).setMinGlobalLimited(6)
@@ -172,17 +173,66 @@ public class FBCMachines {
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)))
                     .build())
-            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
 
-                    GTCEu.id("block/machines/forge_hammer"), false)
+                    GTCEu.id("block/machines/forge_hammer"))
             .tooltips(Component.translatable("block.forgeborncore.steam_forge_hammer.tooltip"))
+            .register();
+    /*public static final MultiblockMachineDefinition AGGLOMERATION_PLATE = GTRegistration.REGISTRATE
+            .multiblock("agglomeration_plate", WorkableElectricMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(FBRecipeTypes.AGGLOMERATION_RECIPES)
+            .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
+            .appearanceBlock(MANASTEEL_CASING)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("CC CC", "CCCCC", " CCC ", "     ", "     ")
+                    .aisle("CCCCC", "CCCCC", "CCCCC", "R    ", "L    ")
+                    .aisle("CC CC", "CCICC", " CCC ", "     ", "     ")
+                    .where(' ', any())
+                    .where("C", blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setExactLimit(1)))
+                    .where('I', controller(blocks(definition.getBlock())))
+                    .where('R', blocks(IRON_BARS))
+                    .where('L', blocks(LIGHTNING_ROD))
+                    .build())
+            .workableCasingRenderer(forgeborncore.id("block/casings/manasteel_casing/manasteel_casing"),
+                    GTCEu.id("block/machines/electrolyzer"))
+            .register();*/
+
+    public final static MultiblockMachineDefinition DRONE_BASE = REGISTRATE
+            .multiblock("drone_base", WorkableElectricMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(FBRecipeTypes.DRONE_MISSIONS)
+            .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("CC CC", "CCCCC", " CCC ", "     ", "     ")
+                    .aisle("CCCCC", "CCCCC", "CCCCC", "R    ", "L    ")
+                    .aisle("CC CC", "CCICC", " CCC ", "     ", "     ")
+                    .where(' ', any())
+                    .where("C", blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setExactLimit(1)))
+                    .where('I', controller(blocks(definition.getBlock())))
+                    .where('R', blocks(IRON_BARS))
+                    .where('L', blocks(LIGHTNING_ROD))
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+                    GTCEu.id("block/multiblock/implosion_compressor"))
             .register();
 
     public static final MachineDefinition STEAM_IMPORT_HATCH = GTRegistration.REGISTRATE
             .machine("steam_fluid_input_hatch", holder -> new SteamFluidHatchPartMachine(holder, IO.IN, 4000, 1))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.IMPORT_FLUIDS)
-            .overlaySteamHullRenderer("fluid_hatch.import")
+            .overlaySteamHullModel("fluid_hatch.import")
             .tooltips(Component.translatable("gtceu.machine.steam_fluid_hatch_notice"))
             .langValue("Fluid Input Hatch (Steam)")
             .register();
@@ -190,7 +240,7 @@ public class FBCMachines {
             .machine("steam_fluid_output_hatch", holder -> new SteamFluidHatchPartMachine(holder, IO.OUT, 4000, 1))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.EXPORT_FLUIDS)
-            .overlaySteamHullRenderer("fluid_hatch.export")
+            .overlaySteamHullModel("fluid_hatch.export")
             .langValue("Fluid Output Hatch (Steam)")
             .register();
 
@@ -239,7 +289,7 @@ public class FBCMachines {
                         .recipeType(recipeType)
                         .recipeModifier(
                                 GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
-                        .workableTieredHullRenderer(GTCEu.id("block/machines/" + name))
+                        .workableTieredHullModel(GTCEu.id("block/machines/" + name))
                         .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, recipeType,
                                 tankScalingFunction.apply(tier), true))
                         .register(),

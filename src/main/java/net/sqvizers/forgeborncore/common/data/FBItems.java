@@ -1,18 +1,17 @@
-package net.sqvizers.forgeborncore.common;
+package net.sqvizers.forgeborncore.common.data;
 
 import com.gregtechceu.gtceu.common.item.armor.GTArmorMaterials;
+import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
-import net.minecraftforge.registries.RegistryObject;
 import net.sqvizers.forgeborncore.api.item.HungerCharmItem;
 import net.sqvizers.forgeborncore.api.item.armor.NanoMuscleSpaceSuite;
 import net.sqvizers.forgeborncore.api.item.armor.SpaceGearItem;
 import net.sqvizers.forgeborncore.api.item.gun.BulletItem;
 import net.sqvizers.forgeborncore.api.item.gun.GunItem;
-import net.sqvizers.forgeborncore.api.item.gun.IBullet;
 import net.sqvizers.forgeborncore.api.item.gun.ShotgunItem;
 import net.sqvizers.forgeborncore.api.item.sword.FrostmourneItem;
 import net.sqvizers.forgeborncore.common.data.tag.item.FBItemTags;
@@ -35,12 +34,18 @@ import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE
 
 public class FBItems {
 
+    static {
+        GTRegistration.REGISTRATE.creativeModeTab(() -> FBCreativeModeTabs.FB_ITEMS);
+    }
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
             forgeborncore.MOD_ID);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
+
+
 
     // Custom Circuits
     // Botania Circuits

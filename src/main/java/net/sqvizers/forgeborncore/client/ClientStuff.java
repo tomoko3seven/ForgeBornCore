@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.sqvizers.forgeborncore.api.item.gun.BulletItem;
-import net.sqvizers.forgeborncore.common.FBItems;
+import net.sqvizers.forgeborncore.common.data.FBItems;
 import net.sqvizers.forgeborncore.common.entity.ModEntities;
 
 import net.sqvizers.forgeborncore.forgeborncore;

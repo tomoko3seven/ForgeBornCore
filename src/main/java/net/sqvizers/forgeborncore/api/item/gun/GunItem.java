@@ -3,7 +3,6 @@ package net.sqvizers.forgeborncore.api.item.gun;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,7 +15,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sqvizers.forgeborncore.common.FBItems;
+import net.sqvizers.forgeborncore.common.data.FBItems;
 import net.sqvizers.forgeborncore.common.entity.projectile.BulletEntity;
 import net.sqvizers.forgeborncore.data.sound.ModSounds;
 

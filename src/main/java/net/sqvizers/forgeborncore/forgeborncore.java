@@ -1,22 +1,12 @@
 package net.sqvizers.forgeborncore;
 
-import com.gregtechceu.gtceu.api.addon.GTAddon;
-import com.gregtechceu.gtceu.api.addon.IGTAddon;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
-import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.gregtechceu.gtceu.common.data.GTFluids;
-import com.gregtechceu.gtceu.common.data.GTMaterials;
-import earth.terrarium.adastra.common.registry.ModFluids;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.sqvizers.forgeborncore.api.data.FBMaterialIconType;
-import net.sqvizers.forgeborncore.api.registries.FBCRegistries;
-import net.sqvizers.forgeborncore.common.FBItems;
-import net.sqvizers.forgeborncore.common.data.FBCCreativeModeTabs;
+import net.sqvizers.forgeborncore.common.data.FBBlocks;
+import net.sqvizers.forgeborncore.common.data.FBCreativeModeTabs;
 import net.sqvizers.forgeborncore.common.data.FBCMachines;
 import net.sqvizers.forgeborncore.common.data.flags.FBFlags;
-import net.sqvizers.forgeborncore.common.data.tag.FBTagPrefix;
 import net.sqvizers.forgeborncore.common.entity.ModEntities;
 import net.sqvizers.forgeborncore.data.FBCDatagen;
 import net.sqvizers.forgeborncore.data.material.ForgeMaterials;
@@ -60,10 +50,12 @@ public final class forgeborncore {
     }
 
     public static void init() {
+        FBBlocks.init();
         ConfigHolder.init();
-        FBCCreativeModeTabs.init();
+        FBCreativeModeTabs.init();
         FBCDatagen.init();
         FBMaterialIconType.init();
+
     }
 
     @SubscribeEvent

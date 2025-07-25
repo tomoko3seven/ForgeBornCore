@@ -16,5 +16,18 @@ public class FBRecipeTypes {
             .setMaxTooltips(1)
             .setSound(GTSoundEntries.CUT);
 
+    public final static GTRecipeType AGGLOMERATION_RECIPES = register(
+            "agglomeration", MULTIBLOCK)
+            .setMaxIOSize(5, 1, 1, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setMaxTooltips(1)
+            .setSound(GTSoundEntries.COOLING);
+
+    public final static GTRecipeType DRONE_MISSIONS = register(
+            "drone_missions", MULTIBLOCK)
+            .setMaxIOSize(6, 10, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setMaxTooltips(1);
+
     public static void init() {}
 }

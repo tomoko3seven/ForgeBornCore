@@ -1,5 +1,6 @@
 package net.sqvizers.forgeborncore.data.material;
 
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import net.sqvizers.forgeborncore.common.data.flags.FBFlags;
 import net.sqvizers.forgeborncore.common.data.materials.FBMaterialSet;
 import net.sqvizers.forgeborncore.forgeborncore;
@@ -12,6 +13,9 @@ import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.FluidState;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
+import static com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.ORE;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Aluminium;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.Iron;
 import static net.sqvizers.forgeborncore.common.data.flags.FBFlags.GENERATE_NANITES;
 
 public class ForgeMaterials {
@@ -22,10 +26,13 @@ public class ForgeMaterials {
     public static Material Blooming;
     public static Material Draconium;
 
+    public static Material Cryotheum;
+
     public static Material Ichor;
 
     // Undergarden
     public static Material Cloggrum;
+    public static Material Utherium;
     public static Material Froststeel;
     public static Material Forgotten;
 
@@ -81,6 +88,7 @@ public class ForgeMaterials {
                 .buildAndRegister();
         Manasteel = new Material.Builder(forgeborncore.id("manasteel"))
                 .ingot()
+                .ore()
                 .color(0x3BAFEA).secondaryColor(0x1E7FCB).iconSet(MaterialIconSet.BRIGHT)
                 .cableProperties(GTValues.V[GTValues.LV], 8, 0, true)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
@@ -126,6 +134,7 @@ public class ForgeMaterials {
         // ForgeBorn
         Draconium = new Material.Builder(forgeborncore.id("draconium"))
                 .ingot()
+                .ore()
                 .color(0x6f42cf).secondaryColor(0x701068).iconSet(MaterialIconSet.BRIGHT)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
                 .toolStats(ToolProperty.Builder.of(4.0F, 2.0F, 130, 1)
@@ -145,10 +154,18 @@ public class ForgeMaterials {
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR)
                 .buildAndRegister();
+
+
+
         Ichor = new Material.Builder(forgeborncore.id("ichor"))
                 .color(0x6f42cf).secondaryColor(0x701068).iconSet(MaterialIconSet.BRIGHT)
                 .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
                 .buildAndRegister().setFormula("Ic");
+        Cryotheum = new Material.Builder(forgeborncore.id("cryotheum"))
+                .dust()
+                .color(0x6f42cf).secondaryColor(0x701068)
+                .liquid(new FluidBuilder().state(FluidState.LIQUID).customStill())
+                .buildAndRegister().setFormula("NH₄[BF₄]·H₂O");
         // Ars Noveau
         SourceMetall = new Material.Builder(forgeborncore.id("sourcemetall"))
                 .ingot()
@@ -159,13 +176,18 @@ public class ForgeMaterials {
         // Undergarden
         Cloggrum = new Material.Builder(forgeborncore.id("cloggrum"))
                 .ingot()
+                .ore()
+                .addOreByproducts(Iron)
                 .color(0x8a735a).iconSet(MaterialIconSet.ROUGH)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR)
                 .buildAndRegister();
         Froststeel = new Material.Builder(forgeborncore.id("froststeel"))
                 .ingot()
-                .color(0xb3d0e2).iconSet(MaterialIconSet.BRIGHT)
+                .ore()
+                .addOreByproducts(Iron, Iron, Aluminium)
+                .washedIn(ForgeMaterials.Cryotheum)
+                .color(0xb3d0e2).iconSet(MaterialIconSet.METALLIC)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR)
                 .buildAndRegister();
@@ -174,6 +196,12 @@ public class ForgeMaterials {
                 .color(0x3dd5a2).iconSet(MaterialIconSet.SHINY)
                 .flags(GENERATE_GEAR, GENERATE_RING, GENERATE_ROD, GENERATE_PLATE, GENERATE_LONG_ROD,
                         GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+        Utherium = new Material.Builder(forgeborncore.id("utherium"))
+                .gem()
+                .ore()
+                .color(0xA4433B).iconSet(MaterialIconSet.DIAMOND)
+                .flags(GENERATE_LENS)
                 .buildAndRegister();
     }
 }
