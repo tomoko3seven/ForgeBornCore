@@ -14,7 +14,9 @@ import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.sqvizers.forgeborncore.common.data.FBItems;
+import net.sqvizers.forgeborncore.common.data.FBRecipeInit;
 import net.sqvizers.forgeborncore.common.data.tag.FBTagPrefix;
+import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
 import java.util.function.Consumer;
 
@@ -43,7 +45,8 @@ public class FBCGTAddon implements IGTAddon {
 
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
-        //net.sqvizers.forgeborncore.common.data.FBCRecipes.init(provider);
+        FBRecipeTypes.init();
+        FBRecipeInit.init(provider);
     }
 
     @Override

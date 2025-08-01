@@ -1,7 +1,9 @@
 package net.sqvizers.forgeborncore.common.data;
 
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.common.data.*;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.AssemblyLineMachine;
 import net.sqvizers.forgeborncore.api.machine.part.SteamFluidHatchPartMachine;
 import net.sqvizers.forgeborncore.common.data.machine.multiblock.steam.WeakSteamParallelMultiBlockMachine;
 import net.sqvizers.forgeborncore.forgeborncore;
@@ -39,6 +41,8 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_INDUSTRIAL_STEAM;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
+import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT;
+import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
@@ -144,7 +148,36 @@ public class FBCMachines {
                     .where('B', blocks(BRONZE_BRICKS_HULL.get()))
                     .where('F', Predicates.frames(GTMaterials.Bronze))
                     .build())
-            .workableCasingModel(forgeborncore.id("block/casings/gcym/industrial_steam_casing"),
+            .workableCasingModel(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
+                    GTCEu.id("block/machines/canner"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip"))
+            .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))
+            .register();
+
+    public static final MultiblockMachineDefinition PRIMITIVE_ASSEMBLY_LINE = GTRegistration.REGISTRATE
+            .multiblock("primitive_assembly_line", WorkableElectricMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(FBRecipeTypes.PRIMITIVE_ASSEMBLY_LINE)
+            .recipeModifiers(DEFAULT_ENVIRONMENT_REQUIREMENT, OC_NON_PERFECT)
+            .appearanceBlock(CASING_INDUSTRIAL_STEAM)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("IFI", "I I", "IFI")
+                    .aisle(" B ", "   ", "III")
+                    .aisle("FBF", "F F", "I I")
+                    .aisle(" B ", "   ", "III")
+                    .aisle("IFI", "C I", "IFI")
+                    .where('I', Predicates.blocks(GCYMBlocks.CASING_INDUSTRIAL_STEAM.get()).setMinGlobalLimited(15)
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1)
+                                    .setExactLimit(1)))
+                    .where(' ', any())
+                    .where('C', Predicates.controller(blocks(definition.getBlock())))
+                    .where('B', blocks(BRONZE_BRICKS_HULL.get()))
+                    .where('F', Predicates.frames(GTMaterials.Bronze))
+                    .build())
+            .partSorter(AssemblyLineMachine::partSorter)
+            .workableCasingModel(GTCEu.id("block/casings/gcym/industrial_steam_casing"),
                     GTCEu.id("block/machines/canner"))
             .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip"))
             .tooltips(Component.translatable("forgeborncore.multiblock.sawmill.tooltip.2"))

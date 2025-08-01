@@ -7,8 +7,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.sqvizers.forgeborncore.api.block.BrickFurnace;
 import net.sqvizers.forgeborncore.forgeborncore;
 
 import net.minecraft.world.item.BlockItem;
@@ -36,12 +34,6 @@ public class FBBlocks {
     public static final BlockEntry<Block> MANASTEEL_CASING = createCasingBlock("manasteel_casing",
             forgeborncore.id("block/casings/manasteel_casing"));
 
-    public static final BlockEntry<Block> BRICK_FURNACE = BLOCK.register("brick_furnace",
-            forgeborncore.id("block/casings/manasteel_casing"))
-
-    public static final BlockEntry<Block> BRICK_FURNACE =
-            BLOCKS.register("brick_furnace",
-                    () -> new BrickFurnace(BlockBehaviour.Properties.copy(Blocks.FURNACE)));
 
     @SuppressWarnings("removal")
     public static BlockEntry<Block> createCasingBlock(String name,

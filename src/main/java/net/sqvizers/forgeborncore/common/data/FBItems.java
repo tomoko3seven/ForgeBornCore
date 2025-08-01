@@ -1,5 +1,6 @@
 package net.sqvizers.forgeborncore.common.data;
 
+import com.gregtechceu.gtceu.common.item.DataItemBehavior;
 import com.gregtechceu.gtceu.common.item.armor.GTArmorMaterials;
 import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.gregtechceu.gtceu.config.ConfigHolder;
@@ -30,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 
+import static net.minecraft.commands.arguments.item.ItemArgument.item;
 import static net.sqvizers.forgeborncore.api.registries.FBCRegistries.REGISTRATE;
 
 public class FBItems {
@@ -45,7 +47,11 @@ public class FBItems {
         ITEMS.register(eventBus);
     }
 
-
+    //GTM Things
+    public static final ItemEntry<ComponentItem> BASIC_CRAFTING_PATTERN = REGISTRATE
+            .item("basic_crafting_pattern", ComponentItem::create)
+            .onRegister(attach(new DataItemBehavior(true)))
+            .register();
 
     // Custom Circuits
     // Botania Circuits

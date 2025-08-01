@@ -1,8 +1,10 @@
 package net.sqvizers.forgeborncore.gtbrucke;
 
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+import com.gregtechceu.gtceu.utils.ResearchManager;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
@@ -28,6 +30,15 @@ public class FBRecipeTypes {
             .setMaxIOSize(6, 10, 3, 3)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setMaxTooltips(1);
+
+    public final static GTRecipeType PRIMITIVE_ASSEMBLY_LINE = register(
+            "primitive_assembly_line", MULTIBLOCK)
+            .setMaxIOSize(8, 1, 3, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.ASSEMBLER)
+            .setHasResearchSlot(true)
+            .onRecipeBuild(ResearchManager::createDefaultResearchRecipe)
+            .setMaxTooltips(4);
 
     public static void init() {}
 }

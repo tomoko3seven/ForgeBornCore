@@ -1,5 +1,7 @@
 package net.sqvizers.forgeborncore;
 
+import com.gregtechceu.gtceu.data.recipe.misc.ComponentRecipes;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.sqvizers.forgeborncore.api.data.FBMaterialIconType;
@@ -10,6 +12,8 @@ import net.sqvizers.forgeborncore.common.data.flags.FBFlags;
 import net.sqvizers.forgeborncore.common.entity.ModEntities;
 import net.sqvizers.forgeborncore.data.FBCDatagen;
 import net.sqvizers.forgeborncore.data.material.ForgeMaterials;
+import net.sqvizers.forgeborncore.data.recipe.FBComponentRecipes;
+import net.sqvizers.forgeborncore.data.recipe.FBRecipes;
 import net.sqvizers.forgeborncore.gtbrucke.FBRecipeTypes;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
@@ -27,6 +31,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.function.Consumer;
 
 @Mod(forgeborncore.MOD_ID)
 public final class forgeborncore {
@@ -57,6 +63,8 @@ public final class forgeborncore {
         FBMaterialIconType.init();
 
     }
+
+
 
     @SubscribeEvent
     public void registerMaterialRegistry(MaterialRegistryEvent event) {
